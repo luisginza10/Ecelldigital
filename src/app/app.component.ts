@@ -10,7 +10,7 @@ export class AppComponent {
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
   title = 'e-comm';
 
-  toggelNavbar() {
+  toggelNavbar(event: any) {
     this.drawer.toggle();
   }
   sideNavMenu = [

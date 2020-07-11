@@ -1,0 +1,23 @@
+<ul class="list">
+  <li class="contain" (click)="toggelSidenav($event)" [routerLink]="['/home']" routerLinkActive="active">
+    <table>
+      <tr>
+        <td>
+          <mat-icon>home</mat-icon>
+        </td>
+        <td style="vertical-align: baseline;"><span style="margin-left: 10px;">HOME</span></td>
+      </tr>
+    </table>
+  </li>
+  <li class="contain" (click)="toggelSidenav($event)" [routerLink]="['/products']" routerLinkActive="active">
+    <table>
+      <tr>
+        <td>
+          <mat-icon>add_to_photos</mat-icon>
+        </td>
+        <td style="vertical-align: baseline;"> <span style="margin-left: 10px;">PRODUCTS</span>
+        </td>
+      </tr>
+    </table>
+  </li>
+</ul>

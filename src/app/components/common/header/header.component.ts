@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   @Output()
   sidenav = new EventEmitter();
 
-  toggelSidenav() {
+  toggelSidenav(event: any) {
     this.sidenav.emit('toggel');
   }
   constructor(public loadingService: LoadingService) { }
