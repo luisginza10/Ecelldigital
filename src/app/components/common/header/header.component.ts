@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { MdePopoverTrigger } from '@material-extended/mde';
+import { LoadingService } from 'src/app/services/loading.service';
+
 
 @Component({
   selector: 'app-header',
@@ -6,10 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  loadingEnable: boolean;
+  sidenavEnable = false;
+  @ViewChildren(MdePopoverTrigger) trigger: QueryList<MdePopoverTrigger>;
 
-  constructor() { }
+  @Output()
+  sidenav = new EventEmitter();
+
+  toggelSidenav() {
+    this.sidenav.emit('toggel');
+  }
+  constructor(public loadingService: LoadingService) { }
 
   ngOnInit(): void {
+    this.loadingService.progressEnable.subscribe(next => {
+      this.loadingEnable = next;
+    });
   }
-
+  enableSidenav() {
+    this.sidenavEnable = !this.sidenavEnable;
+  }
 }
