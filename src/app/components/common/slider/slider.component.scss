@@ -1,0 +1,16 @@
+
+.carousel {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.item {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+  height: 200px;
+}
+
