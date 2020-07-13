@@ -1,2 +1,41 @@
 <app-slider></app-slider>
-<p>home works!</p>
+
+<div class="products-container">
+  <div>
+    <div class="title">
+      <h2>EYEGLASSES</h2>
+    </div>
+    <div class="body">
+      <ng-container *ngIf="!productos">
+        <mat-card class="example-card" *ngFor="let item of productos">
+            <skltn-root class="example-card" duration="1000" [rectRadius]="10" flareWidth="50%" bgFill="#d8d5d1"
+                flareFill="rgba(255,255,255, 0.5)">
+                <!-- Card with Avatar -->
+                <div class="skltn-card">
+                    <div skltn-bone class="skltn-card__avatar" type="circle"></div>
+                    <div class="skltn-card__body">
+                        <div skltn-bone class="skltn-card__title"></div>
+                        <div skltn-bone class="skltn-card__line"></div>
+                        <div skltn-bone class="skltn-card__line"></div>
+                    </div>
+                </div>
+            </skltn-root>
+        </mat-card>
+    </ng-container>
+    <!--Algunas Categorias-->
+    <ng-container *ngIf="productos" >
+      <mat-card *ngFor="let item of productos" class="example-card onLoad" (click)="productHome(item.id)">
+        <img src="{{item.img}}"
+            class="productImg" mat-card-image />
+        <mat-card-content>
+            <div style="display:flex; flex-direction:column; align-items:center">
+                <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
+                <span class="sky-font">Desde {{item.preciomin}} U$</span>
+            </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+
+    </div>
+  </div>
+</div>
