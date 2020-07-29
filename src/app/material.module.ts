@@ -75,7 +75,8 @@ const myModule = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  MdePopoverModule
+  MdePopoverModule,
+  MatPaginatorModule
 ];
 @NgModule({
   declarations: [],

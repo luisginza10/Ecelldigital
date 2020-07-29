@@ -54,7 +54,8 @@ export class SliderComponent implements OnInit {
     this.getProductos();
   }
   getProductos(): void {
-    this.productos = this.nuevoFiltro(this.proServ.productos);
+    this.productos = [];
+    //this.productos = this.nuevoFiltro(this.proServ.productos);
   }
   nuevoFiltro(list: Producto[]): Producto[] {
     const result: Producto[] = [];

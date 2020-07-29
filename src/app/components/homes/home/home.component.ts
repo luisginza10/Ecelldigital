@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
     this.getCategorias();
   }
   getProductos(): void {
-    this.productos = this.proServ.productos;
+    this.productos = [];
   }
   getCategorias(): void {
-    this.categorias = this.catServ.categorias;
+    this.categorias = [];
   }
   nuevoFiltro(id: number): Producto[] {
     const result: Producto[] = [];

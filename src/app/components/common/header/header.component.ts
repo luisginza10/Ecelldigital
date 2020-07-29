@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { MdePopoverTrigger } from '@material-extended/mde';
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from 'src/app/shared/loading.service';
 
 
 @Component({
@@ -23,9 +23,11 @@ export class HeaderComponent implements OnInit {
   constructor(public loadingService: LoadingService) { }
 
   ngOnInit(): void {
+    /*
     this.loadingService.progressEnable.subscribe(next => {
       this.loadingEnable = next;
     });
+    */
   }
   enableSidenav() {
     this.sidenavEnable = !this.sidenavEnable;

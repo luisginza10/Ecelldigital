@@ -16,6 +16,15 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { HomeComponent } from './components/homes/home/home.component';
 import { NgxSkltnModule, SkltnConfig } from 'ngx-skltn';
+import { ListCategoriaComponent } from './components/adminzone/almacen/categorias/list-categoria/list-categoria.component';
+import { ListMarcaComponent } from './components/adminzone/almacen/marcas/list-marca/list-marca.component';
+import { MarcaComponent } from './components/adminzone/almacen/marcas/marca/marca.component';
+import { CategoriaComponent } from './components/adminzone/almacen/categorias/categoria/categoria.component';
+import { MarcaService } from './services/marca.service';
+import { CategoriaService } from './services/categoria.service';
+import { AdminComponent } from './components/adminzone/admin/admin.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -29,7 +38,14 @@ const skltnConfig: SkltnConfig = {
     FooterComponent,
     SidenavComponent,
     SliderComponent,
-    HomeComponent
+    HomeComponent,
+    ListCategoriaComponent,
+    ListMarcaComponent,
+    MarcaComponent,
+    CategoriaComponent,
+    AdminComponent,
+    LoadingComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +60,15 @@ const skltnConfig: SkltnConfig = {
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    MarcaService,
+    CategoriaService
+  ],
+  entryComponents:
+  [
+    MarcaComponent,
+    CategoriaComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

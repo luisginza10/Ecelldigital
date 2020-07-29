@@ -1,0 +1,17 @@
+<div>
+  <div class="content-container">
+    <mat-icon id="close-icon" (click)="close()">close</mat-icon>
+    <span class="content-span full-width">{{data.message}}</span>
+  </div>
+  <div style="align-items: center;" *ngIf="data.input">
+    <input type="text" name="currency-field8" id="currency-field8"
+      inputmode="decimal" value="" data-type="currency" placeholder="Efectivo recibido"
+      pattern="[0-9]*"
+      (keyup)="getCantidad($event,'no')"
+      (blur)="getCantidad($event,'blur')"
+      [ngModel]="inputvalcant">
+  </div>
+  <button mat-flat-button *ngIf="data.input" id="yes-button" [mat-dialog-close]="data.recibido">SI</button>
+  <button mat-flat-button *ngIf="!data.input" id="yes-button" [mat-dialog-close]="true">SI</button>
+  <button mat-flat-button id="no-button" [mat-dialog-close]="false">NO</button>
+</div>
