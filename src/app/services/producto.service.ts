@@ -1,24 +1,81 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto';
-import { Categoria } from '../models/categoria';
-import { Marca } from '../models/marca';
-import { CategoriaService } from './categoria.service';
-import { MarcaService } from './marca.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {map, catchError} from 'rxjs/operators';
+import { NotificationService } from '../shared/notification.service';
+import { BaseurlService } from '../shared/baseurl.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  productos: Producto[] = [];
+  private url = '';
+  public producto: Producto;
+  myControlMarca = new FormControl('', Validators.required);
+  myControlCategoria = new FormControl('', Validators.required);
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    nombre: new FormControl('', Validators.required),
+    descripcion: new FormControl(null),
+    preciomin: new FormControl(null),
+    preciomay: new FormControl(null),
+    promocionar: new FormControl(null),
+    preciopromo: new FormControl(null),
+    img: new FormControl(null),
+    estado: new FormControl(null),
+    nuevo: new FormControl(null),
+    categoria: this.myControlCategoria,
+    marca: this.myControlMarca,
+    createAt: new FormControl(null)
+  });
   constructor(
-    private cateServ: CategoriaService,
-    private marServ: MarcaService){}
-  /*
-    1-Notebook 2-Camaras 3-Equipo de Sonidos 4-Relojes 5-Celulares
-    1-hp 2-Gopro 3-JBL 4-Apple 5-Samsung 6-Sony 7-Acer 8-Toshiba
-    9-Canon 10-Nikon
-  */
-  setProductos(): void {
-
+    private http: HttpClient,
+    private notiserv: NotificationService,
+    private baseurl: BaseurlService) {
+    this.url = this.baseurl.getBaseUrl() + 'api/productos';
+  }
+  findAllDesc(filtro: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.url}/${filtro}`);
+  }
+  populateForm(form: Producto) {
+    this.form.setValue(form);
+  }
+  populateForImg(form: Producto) {
+    this.producto = new Producto();
+    this.producto = form;
+  }
+  findByDesc(filtro: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.url}/filtro/${filtro}`);
+  }
+  create(bean: Producto): Observable<Producto> {
+    return this.http.post<Producto>(this.url, bean).pipe(
+      catchError(e => {
+        if (e.status === 400) {
+          this.notiserv.warn(e.error.error);
+          return throwError(e);
+        }
+        this.notiserv.error(e);
+        return throwError(e);
+      })
+      );
+  }
+  update(bean: Producto): Observable<Producto> {
+    return this.http.put<Producto>(this.url, bean).pipe(
+      catchError(e => {
+          return throwError(e);
+      })
+    );
+  }
+  subirImagen(archivo: File, id: any): Observable<Producto> {
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+    formData.append('id', id);
+    return this.http.post(`${this.url}/upload/`, formData).pipe(
+      catchError(e => {
+        return throwError(e);
+      })
+    );
   }
 }

@@ -1,1 +1,22 @@
-<p>marca works!</p>
+<mat-toolbar>
+  <span>{{service.form.controls['id'].value?"Modificar":"Crear nuevo"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="cerrar()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" (submit)="guardar(service.form.value)">
+  <p>
+    <mat-form-field class="invisible  example-full-width">
+      <input matInput placeholder="Código" formControlName="id">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Descripción" formControlName="descripcion" style="text-transform: uppercase;">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+  </p>
+  <div class="mat-dialog-actions button-row">
+    <button type="submit" mat-raised-button color="primary" [disabled]="service.form.invalid">Guardar</button>
+    <button type="button" mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>
+  </div>
+</form>

@@ -25,6 +25,9 @@ import { CategoriaService } from './services/categoria.service';
 import { AdminComponent } from './components/adminzone/admin/admin.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
+import { ProductoComponent } from './components/adminzone/almacen/productos/producto/producto.component';
+import { ProductoService } from './services/producto.service';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -45,7 +48,9 @@ const skltnConfig: SkltnConfig = {
     CategoriaComponent,
     AdminComponent,
     LoadingComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ListProductoComponent,
+    ProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -62,12 +67,14 @@ const skltnConfig: SkltnConfig = {
   ],
   providers: [
     MarcaService,
-    CategoriaService
+    CategoriaService,
+    ProductoService
   ],
   entryComponents:
   [
     MarcaComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    ProductoComponent
   ],
   bootstrap: [AppComponent]
 })

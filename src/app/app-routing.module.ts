@@ -4,6 +4,7 @@ import { HomeComponent } from './components/homes/home/home.component';
 import { AdminComponent } from './components/adminzone/admin/admin.component';
 import { ListCategoriaComponent } from './components/adminzone/almacen/categorias/list-categoria/list-categoria.component';
 import { ListMarcaComponent } from './components/adminzone/almacen/marcas/list-marca/list-marca.component';
+import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {path: 'listcategorias', component: ListCategoriaComponent},
-      {path: 'listmarcas', component: ListMarcaComponent}
+      {path: 'listmarcas', component: ListMarcaComponent},
+      {path: 'listproductos', component: ListProductoComponent}
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

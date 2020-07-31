@@ -1,30 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { Marca } from 'src/app/models/marca';
-import {MarcaService} from '../../../../../services/marca.service';
-import { NotificationService } from 'src/app/shared/notification.service';
-import { MarcaComponent } from '../marca/marca.component';
-import { LoadingService } from 'src/app/shared/loading.service';
-import { ConfirmdialogService } from 'src/app/shared/confirmdialog.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Producto } from 'src/app/models/producto';
+import { ProductoService } from 'src/app/services/producto.service';
+import { NotificationService } from 'src/app/shared/notification.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { LoadingService } from 'src/app/shared/loading.service';
+import { ConfirmdialogService } from 'src/app/shared/confirmdialog.service';
+import { ProductoComponent } from '../producto/producto.component';
 
 @Component({
-  selector: 'app-list-marca',
-  templateUrl: './list-marca.component.html',
-  styleUrls: ['./list-marca.component.scss']
+  selector: 'app-list-producto',
+  templateUrl: './list-producto.component.html',
+  styleUrls: ['./list-producto.component.scss']
 })
-export class ListMarcaComponent implements OnInit {
-  marcas: Marca[] = [];
-  displayedColumns: string[] = ['id', 'descripcion', 'actions'];
+export class ListProductoComponent implements OnInit {
+  isMobile = true;
+  productos: Producto[] = [];
+  displayedColumns: string[] = ['id', 'nombre', 'actions'];
   dataSource = null;
+  catefilter = 'todos';
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
   constructor(
-    private marcaService: MarcaService,
+    private productoService: ProductoService,
     private notificationService: NotificationService,
     public dialog: MatDialog,
     private loading: LoadingService,
@@ -34,20 +35,20 @@ export class ListMarcaComponent implements OnInit {
       this.listar();
     }
     nuevo() {
-      this.marcaService.form.reset();
+      this.productoService.form.reset();
       this.mostrarDialog();
     }
-    editar(form: Marca) {
-      this.marcaService.populateForm(form);
+    editar(form: Producto) {
+      this.productoService.populateForm(form);
       this.mostrarDialog();
     }
-    eliminar(form: Marca) {
+    eliminar(form: Producto) {
       this.confirmDialog.openConfirmDialog('Desea eliminar registro?')
       .afterClosed().subscribe(res => {
         if (res) {
           this.loading.openDialog();
           form.estado = false;
-          this.marcaService.update(form).subscribe(result => {
+          this.productoService.update(form).subscribe(result => {
             this.listar();
             this.notificationService.success('Registro eliminado con Exito.!');
             this.loading.close();
@@ -61,16 +62,20 @@ export class ListMarcaComponent implements OnInit {
       dialogConf.autoFocus = true;
       dialogConf.width = '300px';
       dialogConf.height = '270px';
-      const dialogref = this.dialog.open(MarcaComponent, dialogConf);
+      const dialogref = this.dialog.open(ProductoComponent, dialogConf);
 
       dialogref.afterClosed().subscribe(result => {
         this.listar();
       });
     }
+    seleccion(event: any) {
+      this.catefilter = event.value;
+      this.listar();
+    }
     listar() {
-      this.marcaService.listar().subscribe(res => {
-          this.marcas = res;
-          this.dataSource = new MatTableDataSource<Marca>(this.marcas);
+      this.productoService.findAllDesc(this.catefilter).subscribe(res => {
+          this.productos = res;
+          this.dataSource = new MatTableDataSource<Producto>(this.productos);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
       });
@@ -82,5 +87,4 @@ export class ListMarcaComponent implements OnInit {
         this.dataSource.paginator.firstPage();
       }
     }
-
 }

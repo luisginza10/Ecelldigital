@@ -5,7 +5,6 @@ import {CategoriaService} from '../../../../../services/categoria.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { CategoriaComponent } from '../categoria/categoria.component';
 import { LoadingService } from 'src/app/shared/loading.service';
-import Swal from 'sweetalert2';
 import { ConfirmdialogService } from 'src/app/shared/confirmdialog.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
