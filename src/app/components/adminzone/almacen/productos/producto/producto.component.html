@@ -1,1 +1,72 @@
-<p>producto works!</p>
+<mat-toolbar>
+  <span>{{service.form.controls['id'].value?"Modificar":"Crear nuevo"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="cerrar()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" (submit)="guardar(service.form.value)">
+
+    <mat-form-field class="invisible  example-full-width">
+      <input matInput placeholder="Código" formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Nombre" formControlName="nombre" style="text-transform: uppercase;">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <textarea matInput placeholder="Descripcion" formControlName="descripcion"></textarea>
+    </mat-form-field>
+    <!--Autocomplete-->
+    <mat-form-field>
+      <input type="text" placeholder="Buscar marca" matInput [formControl]="service.myControlMarca" [matAutocomplete]="automarca" formControlName="marca">
+      <mat-autocomplete #automarca="matAutocomplete" [displayWith]="mostrarMarca">
+        <mat-option *ngFor="let marca of filteredMarca | async" [value]="marca">
+          {{marca.descripcion}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+    <!--Autocomplete-->
+    <mat-form-field>
+      <input type="text" placeholder="Buscar categoria" matInput [formControl]="service.myControlCategoria" [matAutocomplete]="autocate" formControlName="categoria">
+      <mat-autocomplete #autocate="matAutocomplete" [displayWith]="mostrarCategoria">
+        <mat-option *ngFor="let cate of filteredCate | async" [value]="cate">
+          {{cate.descripcion}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Precio Min." formControlName="preciomin">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Precio May." formControlName="preciomay">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [value]=0 placeholder="Promocionar" formControlName="promocionar">
+        <mat-option [value]=1>Si</mat-option>
+        <mat-option [value]=0>No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Precio Promocional." formControlName="preciopromo">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [value]=0 placeholder="Nuevo lanzamiento" formControlName="nuevo">
+        <mat-option [value]=1>Si</mat-option>
+        <mat-option [value]=0>No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <div class="mat-dialog-actions button-row">
+    <button type="submit" mat-raised-button color="primary" [disabled]="service.form.invalid">Guardar</button>
+    <button type="button" mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>
+  </div>
+</form>

@@ -28,6 +28,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
 import { ProductoComponent } from './components/adminzone/almacen/productos/producto/producto.component';
 import { ProductoService } from './services/producto.service';
+import { VerFotoComponent } from './components/adminzone/almacen/productos/ver-foto/ver-foto.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -50,7 +51,8 @@ const skltnConfig: SkltnConfig = {
     LoadingComponent,
     ConfirmComponent,
     ListProductoComponent,
-    ProductoComponent
+    ProductoComponent,
+    VerFotoComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ const skltnConfig: SkltnConfig = {
   [
     MarcaComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
+    VerFotoComponent
   ],
   bootstrap: [AppComponent]
 })

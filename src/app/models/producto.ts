@@ -7,11 +7,11 @@ export class Producto {
   descripcion?: string;
   preciomin?: number;
   preciomay?: number;
-  promocionar?: boolean;
+  promocionar?: number;
   preciopromo?: number;
   img?: string;
   estado?: boolean;
-  nuevo?: boolean;
+  nuevo?: number;
   categoria?: Categoria;
   marca?: Marca;
   createAt?: Date;

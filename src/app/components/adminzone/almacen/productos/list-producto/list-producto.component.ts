@@ -9,6 +9,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { ConfirmdialogService } from 'src/app/shared/confirmdialog.service';
 import { ProductoComponent } from '../producto/producto.component';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { VerFotoComponent } from '../ver-foto/ver-foto.component';
 
 @Component({
   selector: 'app-list-producto',
@@ -17,6 +20,7 @@ import { ProductoComponent } from '../producto/producto.component';
 })
 export class ListProductoComponent implements OnInit {
   isMobile = true;
+  categorias: Categoria[];
   productos: Producto[] = [];
   displayedColumns: string[] = ['id', 'nombre', 'actions'];
   dataSource = null;
@@ -26,6 +30,7 @@ export class ListProductoComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(
     private productoService: ProductoService,
+    private cateServ: CategoriaService,
     private notificationService: NotificationService,
     public dialog: MatDialog,
     private loading: LoadingService,
@@ -33,9 +38,11 @@ export class ListProductoComponent implements OnInit {
 
     ngOnInit() {
       this.listar();
+      this.getCategorias();
     }
     nuevo() {
       this.productoService.form.reset();
+      this.productoService.datosIniciales();
       this.mostrarDialog();
     }
     editar(form: Producto) {
@@ -61,7 +68,7 @@ export class ListProductoComponent implements OnInit {
       dialogConf.disableClose = true;
       dialogConf.autoFocus = true;
       dialogConf.width = '300px';
-      dialogConf.height = '270px';
+      dialogConf.height = '500px';
       const dialogref = this.dialog.open(ProductoComponent, dialogConf);
 
       dialogref.afterClosed().subscribe(result => {
@@ -80,11 +87,33 @@ export class ListProductoComponent implements OnInit {
           this.dataSource.sort = this.sort;
       });
     }
+    verfoto(form: Producto) {
+      this.productoService.populateForImg(form);
+      const dialogConf = new MatDialogConfig();
+      dialogConf.autoFocus = true;
+      dialogConf.width = '400px';
+      dialogConf.height = '450px';
+      const dialogref = this.dialog.open(VerFotoComponent, dialogConf);
+      dialogref.afterClosed().subscribe(result => {
+        this.listar();
+      });
+    }
+    getCategorias() {
+      this.cateServ.getCategorias().subscribe(res => {
+        this.categorias = res;
+      });
+    }
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
 
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
+    }
+    compareFunCate(o1: Categoria, o2: Categoria) {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
     }
 }

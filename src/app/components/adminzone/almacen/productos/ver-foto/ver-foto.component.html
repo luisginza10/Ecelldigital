@@ -1,0 +1,19 @@
+<div class="new-image-container">
+
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{proservice.producto.nombre}}</mat-card-title>
+    </mat-card-header>
+    <img *ngIf="proservice.producto?.img" mat-card-image src="{{baseurl}}api/uploads/img/{{proservice.producto.img}}">
+    <mat-card-content>
+      <div class="container-input-file">
+        <label class="custom-file">
+          <input (change)="seleccion($event)" type="file"/>
+          <mat-icon>cloud_upload</mat-icon><span>Subir imagen</span>
+        </label>
+      </div>
+      <button (click)="subirimg()" [disabled]="!imgselected" mat-button>Guardar</button>
+    </mat-card-content>
+  </mat-card>
+
+</div>

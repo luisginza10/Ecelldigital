@@ -1,3 +1,25 @@
+<div style="display: inline-flex; align-items: center; margin: 5px;">
+  <div style="margin-top: 10px;">
+    <h2>Lista de Productos</h2>
+  </div>&nbsp;&nbsp;
+  <div>
+    <button mat-icon-button color="primary" (click)="nuevo()">
+      <mat-icon aria-label="Add">add</mat-icon>
+        Nuevo
+    </button>
+  </div>
+</div>
+<div style="margin: 5px;">
+  <mat-form-field class="filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>&nbsp;
+  <mat-form-field style="width: 150px;">
+    <mat-select [value]="'todos'" placeholder="Categorias" (selectionChange)="seleccion($event)">
+      <mat-option value="todos">TODOS</mat-option>
+      <mat-option *ngFor="let cat of categorias" [value]="cat.descripcion"> {{ cat.descripcion }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort [class.isMobile]="isMobile">
 
@@ -9,7 +31,9 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Código. </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span class="mobile-label">Código:</span>
-        {{element.id}}
+        {{element.id}} <button mat-icon-button color="accent" (click)="verfoto(element)">
+          <mat-icon aria-label="Edit">image_search</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 

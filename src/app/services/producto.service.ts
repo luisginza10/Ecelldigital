@@ -19,13 +19,13 @@ export class ProductoService {
     id: new FormControl(null),
     nombre: new FormControl('', Validators.required),
     descripcion: new FormControl(null),
-    preciomin: new FormControl(null),
+    preciomin: new FormControl(null, Validators.required),
     preciomay: new FormControl(null),
-    promocionar: new FormControl(null),
+    promocionar: new FormControl(0),
     preciopromo: new FormControl(null),
     img: new FormControl(null),
     estado: new FormControl(null),
-    nuevo: new FormControl(null),
+    nuevo: new FormControl(0),
     categoria: this.myControlCategoria,
     marca: this.myControlMarca,
     createAt: new FormControl(null)
@@ -38,6 +38,12 @@ export class ProductoService {
   }
   findAllDesc(filtro: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.url}/${filtro}`);
+  }
+  datosIniciales() {
+    this.form.controls['promocionar'].setValue(0);
+    this.form.controls['nuevo'].setValue(0);
+    this.form.controls['preciomay'].setValue(0);
+    this.form.controls['preciopromo'].setValue(0);
   }
   populateForm(form: Producto) {
     this.form.setValue(form);
