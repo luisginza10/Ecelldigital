@@ -29,6 +29,7 @@ import { ListProductoComponent } from './components/adminzone/almacen/productos/
 import { ProductoComponent } from './components/adminzone/almacen/productos/producto/producto.component';
 import { ProductoService } from './services/producto.service';
 import { VerFotoComponent } from './components/adminzone/almacen/productos/ver-foto/ver-foto.component';
+import { MenuListItemComponent } from './components/common/menu-list-item/menu-list-item.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -52,7 +53,8 @@ const skltnConfig: SkltnConfig = {
     ConfirmComponent,
     ListProductoComponent,
     ProductoComponent,
-    VerFotoComponent
+    VerFotoComponent,
+    MenuListItemComponent
   ],
   imports: [
     BrowserModule,

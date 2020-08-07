@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavItem } from 'src/app/models/nav-item';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,51 +10,686 @@ import { Router } from '@angular/router';
 export class SidenavComponent implements OnInit {
   @Output()
   sidenav = new EventEmitter();
-
-  profileMenu = [
+  /*
+  navItems: NavItem[] = [
     {
-      title: 'My Profile',
-      link: '/myprofile/profile',
-      icon: 'person'
+      displayName: 'DevFestFL',
+      iconName: 'recent_actors',
+      children: [
+        {
+          displayName: 'Speakers',
+          iconName: 'group',
+          children: [
+            {
+              displayName: 'Michael Prentice',
+              iconName: 'person',
+              route: 'michael-prentice',
+              children: [
+                {
+                  displayName: 'Create Enterprise UIs',
+                  iconName: 'star_rate',
+                  route: 'material-design'
+                }
+              ]
+            },
+            {
+              displayName: 'Stephen Fluin',
+              iconName: 'person',
+              route: 'stephen-fluin',
+              children: [
+                {
+                  displayName: 'What\'s up with the Web?',
+                  iconName: 'star_rate',
+                  route: 'what-up-web'
+                }
+              ]
+            },
+            {
+              displayName: 'Mike Brocchi',
+              iconName: 'person',
+              route: 'mike-brocchi',
+              children: [
+                {
+                  displayName: 'My ally, the CLI',
+                  iconName: 'star_rate',
+                  route: 'my-ally-cli'
+                },
+                {
+                  displayName: 'Become an Angular Tailor',
+                  iconName: 'star_rate',
+                  route: 'become-angular-tailer'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          displayName: 'Sessions',
+          iconName: 'speaker_notes',
+          children: [
+            {
+              displayName: 'Create Enterprise UIs',
+              iconName: 'star_rate',
+              route: 'material-design'
+            },
+            {
+              displayName: 'What\'s up with the Web?',
+              iconName: 'star_rate',
+              route: 'what-up-web'
+            },
+            {
+              displayName: 'My ally, the CLI',
+              iconName: 'star_rate',
+              route: 'my-ally-cli'
+            },
+            {
+              displayName: 'Become an Angular Tailor',
+              iconName: 'star_rate',
+              route: 'become-angular-tailer'
+            }
+          ]
+        },
+        {
+          displayName: 'Feedback',
+          iconName: 'feedback',
+          route: 'feedback'
+        }
+      ]
     },
     {
-      title: 'Saved Cards',
-      link: '/myprofile/carddetails',
-      icon:'account_balance'
+      displayName: 'Disney',
+      iconName: 'videocam',
+      children: [
+        {
+          displayName: 'Speakers',
+          iconName: 'group',
+          children: [
+            {
+              displayName: 'Michael Prentice',
+              iconName: 'person',
+              route: 'michael-prentice',
+              children: [
+                {
+                  displayName: 'Create Enterprise UIs',
+                  iconName: 'star_rate',
+                  route: 'material-design'
+                }
+              ]
+            },
+            {
+              displayName: 'Stephen Fluin',
+              iconName: 'person',
+              route: 'stephen-fluin',
+              children: [
+                {
+                  displayName: 'What\'s up with the Web?',
+                  iconName: 'star_rate',
+                  route: 'what-up-web'
+                }
+              ]
+            },
+            {
+              displayName: 'Mike Brocchi',
+              iconName: 'person',
+              route: 'mike-brocchi',
+              children: [
+                {
+                  displayName: 'My ally, the CLI',
+                  iconName: 'star_rate',
+                  route: 'my-ally-cli'
+                },
+                {
+                  displayName: 'Become an Angular Tailor',
+                  iconName: 'star_rate',
+                  route: 'become-angular-tailer'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          displayName: 'Sessions',
+          iconName: 'speaker_notes',
+          children: [
+            {
+              displayName: 'Create Enterprise UIs',
+              iconName: 'star_rate',
+              route: 'material-design'
+            },
+            {
+              displayName: 'What\'s up with the Web?',
+              iconName: 'star_rate',
+              route: 'what-up-web'
+            },
+            {
+              displayName: 'My ally, the CLI',
+              iconName: 'star_rate',
+              route: 'my-ally-cli'
+            },
+            {
+              displayName: 'Become an Angular Tailor',
+              iconName: 'star_rate',
+              route: 'become-angular-tailer'
+            }
+          ]
+        },
+        {
+          displayName: 'Feedback',
+          iconName: 'feedback',
+          route: 'feedback'
+        }
+      ]
     },
     {
-      title: 'My Address',
-      link: '/myprofile/address',
-      icon: 'border_color'
+      displayName: 'Orlando',
+      iconName: 'movie_filter',
+      children: [
+        {
+          displayName: 'Speakers',
+          iconName: 'group',
+          children: [
+            {
+              displayName: 'Michael Prentice',
+              iconName: 'person',
+              route: 'michael-prentice',
+              children: [
+                {
+                  displayName: 'Create Enterprise UIs',
+                  iconName: 'star_rate',
+                  route: 'material-design'
+                }
+              ]
+            },
+            {
+              displayName: 'Stephen Fluin',
+              iconName: 'person',
+              route: 'stephen-fluin',
+              children: [
+                {
+                  displayName: 'What\'s up with the Web?',
+                  iconName: 'star_rate',
+                  route: 'what-up-web'
+                }
+              ]
+            },
+            {
+              displayName: 'Mike Brocchi',
+              iconName: 'person',
+              route: 'mike-brocchi',
+              children: [
+                {
+                  displayName: 'My ally, the CLI',
+                  iconName: 'star_rate',
+                  route: 'my-ally-cli'
+                },
+                {
+                  displayName: 'Become an Angular Tailor',
+                  iconName: 'star_rate',
+                  route: 'become-angular-tailer'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          displayName: 'Sessions',
+          iconName: 'speaker_notes',
+          children: [
+            {
+              displayName: 'Create Enterprise UIs',
+              iconName: 'star_rate',
+              route: 'material-design'
+            },
+            {
+              displayName: 'What\'s up with the Web?',
+              iconName: 'star_rate',
+              route: 'what-up-web'
+            },
+            {
+              displayName: 'My ally, the CLI',
+              iconName: 'star_rate',
+              route: 'my-ally-cli'
+            },
+            {
+              displayName: 'Become an Angular Tailor',
+              iconName: 'star_rate',
+              route: 'become-angular-tailer'
+            }
+          ]
+        },
+        {
+          displayName: 'Feedback',
+          iconName: 'feedback',
+          route: 'feedback'
+        }
+      ]
     },
     {
-      title: 'My Orders',
-      link: '/myprofile/orders',
-      icon: 'next_week'
-    },
-    {
-      title: 'My Cart',
-      link: '/shopping-cart',
-      icon: 'add_shopping_cart'
-    },
-    {
-      title: 'My Wishlist',
-      link: '/myprofile/wishlist',
-      icon:'shopping_cart'
-    },
+      displayName: 'Maleficent',
+      disabled: true,
+      iconName: 'report_problem',
+      children: [
+        {
+          displayName: 'Speakers',
+          iconName: 'group',
+          children: [
+            {
+              displayName: 'Michael Prentice',
+              iconName: 'person',
+              route: 'michael-prentice',
+              children: [
+                {
+                  displayName: 'Create Enterprise UIs',
+                  iconName: 'star_rate',
+                  route: 'material-design'
+                }
+              ]
+            },
+            {
+              displayName: 'Stephen Fluin',
+              iconName: 'person',
+              route: 'stephen-fluin',
+              children: [
+                {
+                  displayName: 'What\'s up with the Web?',
+                  iconName: 'star_rate',
+                  route: 'what-up-web'
+                }
+              ]
+            },
+            {
+              displayName: 'Mike Brocchi',
+              iconName: 'person',
+              route: 'mike-brocchi',
+              children: [
+                {
+                  displayName: 'My ally, the CLI',
+                  iconName: 'star_rate',
+                  route: 'my-ally-cli'
+                },
+                {
+                  displayName: 'Become an Angular Tailor',
+                  iconName: 'star_rate',
+                  route: 'become-angular-tailer'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          displayName: 'Sessions',
+          iconName: 'speaker_notes',
+          children: [
+            {
+              displayName: 'Create Enterprise UIs',
+              iconName: 'star_rate',
+              route: 'material-design'
+            },
+            {
+              displayName: 'What\'s up with the Web?',
+              iconName: 'star_rate',
+              route: 'what-up-web'
+            },
+            {
+              displayName: 'My ally, the CLI',
+              iconName: 'star_rate',
+              route: 'my-ally-cli'
+            },
+            {
+              displayName: 'Become an Angular Tailor',
+              iconName: 'star_rate',
+              route: 'become-angular-tailer'
+            }
+          ]
+        },
+        {
+          displayName: 'Feedback',
+          iconName: 'feedback',
+          route: 'feedback'
+        }
+      ]
+    }
   ];
-  myStuff = [
-    {
-      title: 'My Reviews',
-      link: '/myprofile/reviews',
-      icon: 'rate_review'
-    },
-    {
-      title: 'My Rewards',
-      link: '/myprofile/rewards',
-      icon: 'rate_review'
-    },
-  ];
+  */
+ navItems: NavItem[] = [
+  {
+    displayName: 'DevFestFL',
+    iconName: 'recent_actors',
+    children: [
+      {
+        displayName: 'Speakers',
+        iconName: 'group',
+        children: [
+          {
+            displayName: 'Michael Prentice',
+            iconName: 'person',
+            route: 'michael-prentice',
+            children: [
+              {
+                displayName: 'Create Enterprise UIs',
+                iconName: 'star_rate',
+                route: 'material-design'
+              }
+            ]
+          },
+          {
+            displayName: 'Stephen Fluin',
+            iconName: 'person',
+            route: 'stephen-fluin',
+            children: [
+              {
+                displayName: 'What\'s up with the Web?',
+                iconName: 'star_rate',
+                route: 'what-up-web'
+              }
+            ]
+          },
+          {
+            displayName: 'Mike Brocchi',
+            iconName: 'person',
+            route: 'mike-brocchi',
+            children: [
+              {
+                displayName: 'My ally, the CLI',
+                iconName: 'star_rate',
+                route: 'my-ally-cli'
+              },
+              {
+                displayName: 'Become an Angular Tailor',
+                iconName: 'star_rate',
+                route: 'become-angular-tailer'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        displayName: 'Sessions',
+        iconName: 'speaker_notes',
+        children: [
+          {
+            displayName: 'Create Enterprise UIs',
+            iconName: 'star_rate',
+            route: 'material-design'
+          },
+          {
+            displayName: 'What\'s up with the Web?',
+            iconName: 'star_rate',
+            route: 'what-up-web'
+          },
+          {
+            displayName: 'My ally, the CLI',
+            iconName: 'star_rate',
+            route: 'my-ally-cli'
+          },
+          {
+            displayName: 'Become an Angular Tailor',
+            iconName: 'star_rate',
+            route: 'become-angular-tailer'
+          }
+        ]
+      },
+      {
+        displayName: 'Feedback',
+        iconName: 'feedback',
+        route: 'feedback'
+      }
+    ]
+  },
+  {
+    displayName: 'Disney',
+    iconName: 'videocam',
+    children: [
+      {
+        displayName: 'Speakers',
+        iconName: 'group',
+        children: [
+          {
+            displayName: 'Michael Prentice',
+            iconName: 'person',
+            route: 'michael-prentice',
+            children: [
+              {
+                displayName: 'Create Enterprise UIs',
+                iconName: 'star_rate',
+                route: 'material-design'
+              }
+            ]
+          },
+          {
+            displayName: 'Stephen Fluin',
+            iconName: 'person',
+            route: 'stephen-fluin',
+            children: [
+              {
+                displayName: 'What\'s up with the Web?',
+                iconName: 'star_rate',
+                route: 'what-up-web'
+              }
+            ]
+          },
+          {
+            displayName: 'Mike Brocchi',
+            iconName: 'person',
+            route: 'mike-brocchi',
+            children: [
+              {
+                displayName: 'My ally, the CLI',
+                iconName: 'star_rate',
+                route: 'my-ally-cli'
+              },
+              {
+                displayName: 'Become an Angular Tailor',
+                iconName: 'star_rate',
+                route: 'become-angular-tailer'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        displayName: 'Sessions',
+        iconName: 'speaker_notes',
+        children: [
+          {
+            displayName: 'Create Enterprise UIs',
+            iconName: 'star_rate',
+            route: 'material-design'
+          },
+          {
+            displayName: 'What\'s up with the Web?',
+            iconName: 'star_rate',
+            route: 'what-up-web'
+          },
+          {
+            displayName: 'My ally, the CLI',
+            iconName: 'star_rate',
+            route: 'my-ally-cli'
+          },
+          {
+            displayName: 'Become an Angular Tailor',
+            iconName: 'star_rate',
+            route: 'become-angular-tailer'
+          }
+        ]
+      },
+      {
+        displayName: 'Feedback',
+        iconName: 'feedback',
+        route: 'feedback'
+      }
+    ]
+  },
+  {
+    displayName: 'Orlando',
+    iconName: 'movie_filter',
+    children: [
+      {
+        displayName: 'Speakers',
+        iconName: 'group',
+        children: [
+          {
+            displayName: 'Michael Prentice',
+            iconName: 'person',
+            route: 'michael-prentice',
+            children: [
+              {
+                displayName: 'Create Enterprise UIs',
+                iconName: 'star_rate',
+                route: 'material-design'
+              }
+            ]
+          },
+          {
+            displayName: 'Stephen Fluin',
+            iconName: 'person',
+            route: 'stephen-fluin',
+            children: [
+              {
+                displayName: 'What\'s up with the Web?',
+                iconName: 'star_rate',
+                route: 'what-up-web'
+              }
+            ]
+          },
+          {
+            displayName: 'Mike Brocchi',
+            iconName: 'person',
+            route: 'mike-brocchi',
+            children: [
+              {
+                displayName: 'My ally, the CLI',
+                iconName: 'star_rate',
+                route: 'my-ally-cli'
+              },
+              {
+                displayName: 'Become an Angular Tailor',
+                iconName: 'star_rate',
+                route: 'become-angular-tailer'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        displayName: 'Sessions',
+        iconName: 'speaker_notes',
+        children: [
+          {
+            displayName: 'Create Enterprise UIs',
+            iconName: 'star_rate',
+            route: 'material-design'
+          },
+          {
+            displayName: 'What\'s up with the Web?',
+            iconName: 'star_rate',
+            route: 'what-up-web'
+          },
+          {
+            displayName: 'My ally, the CLI',
+            iconName: 'star_rate',
+            route: 'my-ally-cli'
+          },
+          {
+            displayName: 'Become an Angular Tailor',
+            iconName: 'star_rate',
+            route: 'become-angular-tailer'
+          }
+        ]
+      },
+      {
+        displayName: 'Feedback',
+        iconName: 'feedback',
+        route: 'feedback'
+      }
+    ]
+  },
+  {
+    displayName: 'Maleficent',
+    disabled: true,
+    iconName: 'report_problem',
+    children: [
+      {
+        displayName: 'Speakers',
+        iconName: 'group',
+        children: [
+          {
+            displayName: 'Michael Prentice',
+            iconName: 'person',
+            route: 'michael-prentice',
+            children: [
+              {
+                displayName: 'Create Enterprise UIs',
+                iconName: 'star_rate',
+                route: 'material-design'
+              }
+            ]
+          },
+          {
+            displayName: 'Stephen Fluin',
+            iconName: 'person',
+            route: 'stephen-fluin',
+            children: [
+              {
+                displayName: 'What\'s up with the Web?',
+                iconName: 'star_rate',
+                route: 'what-up-web'
+              }
+            ]
+          },
+          {
+            displayName: 'Mike Brocchi',
+            iconName: 'person',
+            route: 'mike-brocchi',
+            children: [
+              {
+                displayName: 'My ally, the CLI',
+                iconName: 'star_rate',
+                route: 'my-ally-cli'
+              },
+              {
+                displayName: 'Become an Angular Tailor',
+                iconName: 'star_rate',
+                route: 'become-angular-tailer'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        displayName: 'Sessions',
+        iconName: 'speaker_notes',
+        children: [
+          {
+            displayName: 'Create Enterprise UIs',
+            iconName: 'star_rate',
+            route: 'material-design'
+          },
+          {
+            displayName: 'What\'s up with the Web?',
+            iconName: 'star_rate',
+            route: 'what-up-web'
+          },
+          {
+            displayName: 'My ally, the CLI',
+            iconName: 'star_rate',
+            route: 'my-ally-cli'
+          },
+          {
+            displayName: 'Become an Angular Tailor',
+            iconName: 'star_rate',
+            route: 'become-angular-tailer'
+          }
+        ]
+      },
+      {
+        displayName: 'Feedback',
+        iconName: 'feedback',
+        route: 'feedback'
+      }
+    ]
+  }
+];
   toggelSidenav(even: any) {
     this.sidenav.emit('toggel');
   }

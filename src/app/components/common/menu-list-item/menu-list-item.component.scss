@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  outline: none;
+
+  .mat-list-item.active {
+    background-color: whitesmoke
+  }
+  &:hover,
+  &:focus {
+    >.mat-list-item:not(.expanded) {
+      background-color: whitesmoke !important;
+    }
+  }
+}
+
+.mat-list-item {
+  padding: 8px 0;
+
+  .routeIcon {
+    margin-right: 40px;
+  }
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
