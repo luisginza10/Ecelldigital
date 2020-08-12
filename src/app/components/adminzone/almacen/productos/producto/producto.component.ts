@@ -5,9 +5,9 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { Categoria } from 'src/app/models/categoria';
+import { Subcategoria } from 'src/app/models/subcategoria';
 import { Marca } from 'src/app/models/marca';
-import { CategoriaService } from 'src/app/services/categoria.service';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { map, flatMap } from 'rxjs/operators';
 import { MarcaService } from 'src/app/services/marca.service';
 
@@ -17,13 +17,13 @@ import { MarcaService } from 'src/app/services/marca.service';
   styleUrls: ['./producto.component.scss']
 })
 export class ProductoComponent implements OnInit {
-  categorias: Categoria[];
+  subcategorias: Subcategoria[];
   marcas: Marca[];
-  filteredCate: Observable<Categoria[]>;
+  filteredsubCate: Observable<Subcategoria[]>;
   filteredMarca: Observable<Marca[]>;
   constructor(
     public service: ProductoService,
-    public cateservice: CategoriaService,
+    public subcateservice: SubcategoriaService,
     public marcaservice: MarcaService,
     public dialogRef: MatDialogRef<ProductoComponent>,
     private notification: NotificationService,
@@ -31,22 +31,22 @@ export class ProductoComponent implements OnInit {
 
  ngOnInit() {
   this.getCombo();
-  this.autoCompleteCategoria();
+  this.autoCompletesubcategoria();
   this.autoCompleteMarca();
  }
- autoCompleteCategoria() {
-  this.filteredCate = this.service.myControlCategoria.valueChanges
+ autoCompletesubcategoria() {
+  this.filteredsubCate = this.service.myControlsubcategoria.valueChanges
     .pipe(
       map(value => typeof value === 'string' ? value : ''),
-      flatMap(value => value ? this._filterCategoria(value) : [])
+      flatMap(value => value ? this._filtersubcategoria(value) : [])
     );
   }
-  private _filterCategoria(value: string): Observable<Categoria[]> {
+  private _filtersubcategoria(value: string): Observable<Subcategoria[]> {
       const filterValue = value.toLowerCase();
-      return this.cateservice.findByDesc(filterValue);
+      return this.subcateservice.findByDesc(filterValue);
   }
-  mostrarCategoria(categoria?: Categoria): string | undefined {
-    return categoria ? categoria.descripcion : undefined;
+  mostrarsubcategoria(subcategoria?: Subcategoria): string | undefined {
+    return subcategoria ? subcategoria.descripcion : undefined;
   }
  //
  autoCompleteMarca() {
@@ -93,12 +93,12 @@ public limpiar(): void {
   this.service.form.controls['promocionar'].setValue(0);
 }
 getCombo() {
-  this.getCategoria();
+  this.getsubcategoria();
   this.getMarca();
 }
-getCategoria() {
-  this.cateservice.getCategorias().subscribe(res => {
-    this.categorias = res;
+getsubcategoria() {
+  this.subcateservice.getsubcategorias().subscribe(res => {
+    this.subcategorias = res;
   });
 }
 getMarca() {
@@ -106,7 +106,7 @@ getMarca() {
     this.marcas = res;
   });
 }
-compareFunction(o1: Categoria, o2: Categoria) {
+compareFunction(o1: Subcategoria, o2: Subcategoria) {
   if (o1 === undefined && o2 === undefined) {
     return true;
   }

@@ -1,4 +1,4 @@
-import { Categoria } from './categoria';
+import { Subcategoria } from './subcategoria';
 import { Marca } from './marca';
 
 export class Producto {
@@ -12,7 +12,7 @@ export class Producto {
   img?: string;
   estado?: boolean;
   nuevo?: number;
-  categoria?: Categoria;
+  subcategoria?: Subcategoria;
   marca?: Marca;
   createAt?: Date;
 }

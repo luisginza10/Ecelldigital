@@ -14,7 +14,7 @@ export class ProductoService {
   private url = '';
   public producto: Producto;
   myControlMarca = new FormControl('', Validators.required);
-  myControlCategoria = new FormControl('', Validators.required);
+  myControlsubcategoria = new FormControl('', Validators.required);
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl('', Validators.required),
@@ -26,7 +26,7 @@ export class ProductoService {
     img: new FormControl(null),
     estado: new FormControl(null),
     nuevo: new FormControl(0),
-    categoria: this.myControlCategoria,
+    subcategoria: this.myControlsubcategoria,
     marca: this.myControlMarca,
     createAt: new FormControl(null)
   });

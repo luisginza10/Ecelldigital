@@ -9,8 +9,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { ConfirmdialogService } from 'src/app/shared/confirmdialog.service';
 import { ProductoComponent } from '../producto/producto.component';
-import { Categoria } from 'src/app/models/categoria';
-import { CategoriaService } from 'src/app/services/categoria.service';
+import { Subcategoria } from 'src/app/models/subcategoria';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { VerFotoComponent } from '../ver-foto/ver-foto.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { VerFotoComponent } from '../ver-foto/ver-foto.component';
 })
 export class ListProductoComponent implements OnInit {
   isMobile = true;
-  categorias: Categoria[];
+  subcategorias: Subcategoria[];
   productos: Producto[] = [];
   displayedColumns: string[] = ['id', 'nombre', 'actions'];
   dataSource = null;
@@ -30,7 +30,7 @@ export class ListProductoComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(
     private productoService: ProductoService,
-    private cateServ: CategoriaService,
+    private subcateServ: SubcategoriaService,
     private notificationService: NotificationService,
     public dialog: MatDialog,
     private loading: LoadingService,
@@ -38,7 +38,7 @@ export class ListProductoComponent implements OnInit {
 
     ngOnInit() {
       this.listar();
-      this.getCategorias();
+      this.getsubcategorias();
     }
     nuevo() {
       this.productoService.form.reset();
@@ -98,9 +98,9 @@ export class ListProductoComponent implements OnInit {
         this.listar();
       });
     }
-    getCategorias() {
-      this.cateServ.getCategorias().subscribe(res => {
-        this.categorias = res;
+    getsubcategorias() {
+      this.subcateServ.getsubcategorias().subscribe(res => {
+        this.subcategorias = res;
       });
     }
     applyFilter(filterValue: string) {
@@ -110,7 +110,7 @@ export class ListProductoComponent implements OnInit {
         this.dataSource.paginator.firstPage();
       }
     }
-    compareFunCate(o1: Categoria, o2: Categoria) {
+    compareFunCate(o1: Subcategoria, o2: Subcategoria) {
       if (o1 === undefined && o2 === undefined) {
         return true;
       }

@@ -29,10 +29,10 @@
     </mat-form-field>
     <!--Autocomplete-->
     <mat-form-field>
-      <input type="text" placeholder="Buscar categoria" matInput [formControl]="service.myControlCategoria" [matAutocomplete]="autocate" formControlName="categoria">
-      <mat-autocomplete #autocate="matAutocomplete" [displayWith]="mostrarCategoria">
-        <mat-option *ngFor="let cate of filteredCate | async" [value]="cate">
-          {{cate.descripcion}}
+      <input type="text" placeholder="Buscar subcategoria" matInput [formControl]="service.myControlsubcategoria" [matAutocomplete]="autocate" formControlName="subcategoria">
+      <mat-autocomplete #autocate="matAutocomplete" [displayWith]="mostrarsubcategoria">
+        <mat-option *ngFor="let subcate of filteredsubCate | async" [value]="subcate">
+          {{subcate.descripcion}}
         </mat-option>
       </mat-autocomplete>
       <mat-error>Este campo es requerido.</mat-error>

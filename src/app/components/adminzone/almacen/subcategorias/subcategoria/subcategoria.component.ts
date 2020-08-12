@@ -1,25 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from 'src/app/models/categoria';
-import { CategoriaService } from 'src/app/services/categoria.service';
+import { Subcategoria } from 'src/app/models/subcategoria';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
-  selector: 'app-categoria',
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.scss']
+  selector: 'app-subsubcategoria',
+  templateUrl: './subcategoria.component.html',
+  styleUrls: ['./subcategoria.component.scss']
 })
-export class CategoriaComponent implements OnInit {
+export class SubcategoriaComponent implements OnInit {
+  categorias: Categoria[];
   constructor(
-    public catservice: CategoriaService,
-    public dialogRef: MatDialogRef<CategoriaComponent>,
+    public catservice: SubcategoriaService,
+    public dialogRef: MatDialogRef<SubcategoriaComponent>,
     private notification: NotificationService,
-    private loading: LoadingService) { }
+    private loading: LoadingService,
+    private cateserv: CategoriaService) { }
 
  ngOnInit() {
+   this.liscategoria();
  }
- public guardar(form: Categoria): void {
+ liscategoria() {
+  this.cateserv.getCategorias().subscribe(res => {
+    this.categorias = res;
+  });
+ }
+ public guardar(form: Subcategoria): void {
    form.descripcion = form.descripcion.toLocaleUpperCase();
    this.loading.openDialog();
    if (!this.catservice.form.get('id').value) {
@@ -46,6 +56,12 @@ export class CategoriaComponent implements OnInit {
  }
  public limpiar(): void {
    this.catservice.form.reset();
+ }
+ compareFunCate(o1: Categoria, o2: Categoria) {
+  if (o1 === undefined && o2 === undefined) {
+    return true;
+  }
+  return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.id === o2.id;
  }
 
 }

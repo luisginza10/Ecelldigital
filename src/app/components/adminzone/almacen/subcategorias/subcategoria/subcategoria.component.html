@@ -1,4 +1,3 @@
-
 <mat-toolbar>
   <span>{{catservice.form.controls['id'].value?"Modificar":"Crear nuevo"}}</span>
   <span class="fill-remaining-space"></span>
@@ -14,10 +13,15 @@
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput placeholder="Icono" formControlName="icono">
+    <mat-form-field style="width: 200px;">
+      <mat-select [compareWith]="compareFunCate" placeholder="Categorias" formControlName="categoria">
+        <ng-container *ngFor="let cat of categorias">
+          <mat-option [value]="cat"> {{ cat.descripcion }}</mat-option>
+        </ng-container>
+      </mat-select>
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>
+
   <div class="mat-dialog-actions button-row">
     <button type="submit" mat-raised-button color="primary" [disabled]="catservice.form.invalid">Guardar</button>
     <button type="button" mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>

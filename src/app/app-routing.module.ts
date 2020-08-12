@@ -5,6 +5,7 @@ import { AdminComponent } from './components/adminzone/admin/admin.component';
 import { ListCategoriaComponent } from './components/adminzone/almacen/categorias/list-categoria/list-categoria.component';
 import { ListMarcaComponent } from './components/adminzone/almacen/marcas/list-marca/list-marca.component';
 import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
+import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcategorias/list-subcategoria/list-subcategoria.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {path: 'listcategorias', component: ListCategoriaComponent},
+      {path: 'listsubcategorias', component: ListSubcategoriaComponent},
       {path: 'listmarcas', component: ListMarcaComponent},
       {path: 'listproductos', component: ListProductoComponent}
     ]

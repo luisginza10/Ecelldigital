@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
       if (result.length === 4) {
             break;
       }
-      if (value.categoria.id === id) {
+      if (value.subcategoria.id === id) {
           result.push(value);
       }
     }

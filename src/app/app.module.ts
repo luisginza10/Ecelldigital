@@ -30,6 +30,9 @@ import { ProductoComponent } from './components/adminzone/almacen/productos/prod
 import { ProductoService } from './services/producto.service';
 import { VerFotoComponent } from './components/adminzone/almacen/productos/ver-foto/ver-foto.component';
 import { MenuListItemComponent } from './components/common/menu-list-item/menu-list-item.component';
+import { SubcategoriaService } from './services/subcategoria.service';
+import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcategorias/list-subcategoria/list-subcategoria.component';
+import { SubcategoriaComponent } from './components/adminzone/almacen/subcategorias/subcategoria/subcategoria.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -54,7 +57,9 @@ const skltnConfig: SkltnConfig = {
     ListProductoComponent,
     ProductoComponent,
     VerFotoComponent,
-    MenuListItemComponent
+    MenuListItemComponent,
+    ListSubcategoriaComponent,
+    SubcategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -72,14 +77,16 @@ const skltnConfig: SkltnConfig = {
   providers: [
     MarcaService,
     CategoriaService,
-    ProductoService
+    ProductoService,
+    SubcategoriaService
   ],
   entryComponents:
   [
     MarcaComponent,
     CategoriaComponent,
     ProductoComponent,
-    VerFotoComponent
+    VerFotoComponent,
+    SubcategoriaComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -14,9 +14,9 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>&nbsp;
   <mat-form-field style="width: 150px;">
-    <mat-select [value]="'todos'" placeholder="Categorias" (selectionChange)="seleccion($event)">
+    <mat-select [value]="'todos'" placeholder="subcategorias" (selectionChange)="seleccion($event)">
       <mat-option value="todos">TODOS</mat-option>
-      <mat-option *ngFor="let cat of categorias" [value]="cat.descripcion"> {{ cat.descripcion }}</mat-option>
+      <mat-option *ngFor="let cat of subcategorias" [value]="cat.descripcion"> {{ cat.descripcion }}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
