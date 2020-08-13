@@ -136,3 +136,39 @@
   color: black;
   border: 1px solid #00cccc;
 }
+
+/*--------mat-card---------*/
+mat-card {
+  box-shadow: none !important;
+  //border: 1px solid #75890c !important;
+  transition: 0.3s !important;
+  width: 250px !important;
+  margin: 10px 10px !important;
+  cursor: pointer !important;
+  position: relative;
+  overflow: hidden;
+.fab {
+    z-index: 0;
+    position: absolute;
+}
+
+}
+
+mat-card img{
+  padding-bottom: 0px !important;
+  transition: 0.3s !important;
+}
+
+mat-card img:hover{
+  border: #fff !important;
+  transform: scale(1.1);
+  z-index: 2;
+}
+mat-card:hover{
+  .fab {
+      z-index: 2;
+      display: flex;
+    flex-direction: row-reverse;
+    width: 90%;
+  }
+}

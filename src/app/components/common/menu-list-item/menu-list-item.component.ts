@@ -2,6 +2,7 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {NavItem} from '../../../models/nav-item';
 import {Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Categoria } from 'src/app/models/categoria';
 
 @Component({
   selector: 'app-menu-list-item',
@@ -20,7 +21,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class MenuListItemComponent implements OnInit {
   expanded: boolean;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  @Input() item: NavItem;
+  @Input() item: Categoria;
   @Input() depth: number;
 
   constructor(public router: Router) {
@@ -31,12 +32,12 @@ export class MenuListItemComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  onItemSelected(item: NavItem) {
-    if (!item.children || !item.children.length) {
-      this.router.navigate([item.route]);
+  onItemSelected(item: Categoria) {
+    if (!item.subcatelist || !item.subcatelist.length) {
+      this.router.navigate(['#']);
       //this.navService.closeNav();
     }
-    if (item.children && item.children.length) {
+    if (item.subcatelist && item.subcatelist.length) {
       this.expanded = !this.expanded;
     }
   }

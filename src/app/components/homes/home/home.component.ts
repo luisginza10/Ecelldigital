@@ -3,8 +3,9 @@ import {MatIconRegistry} from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
-import { CategoriaService } from 'src/app/services/categoria.service';
-import { Categoria } from 'src/app/models/categoria';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { Subcategoria } from 'src/app/models/subcategoria';
+import { BaseurlService } from 'src/app/shared/baseurl.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,25 +26,32 @@ export class HomeComponent implements OnInit {
   imageLoad = new Array(1);
   productos: Producto[] = [];
   filterNotes: Producto[];
-  categorias: Categoria[] = [];
+  subcategorias: Subcategoria[] = [];
+  baseurl = '';
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private proServ: ProductoService,
-    private catServ: CategoriaService) {
-      iconRegistry.addSvgIcon(
+    private subcatServ: SubcategoriaService,
+    public base: BaseurlService) {
+    this.baseurl = this.base.getBaseUrl();
+    iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/images/rebaja.svg'));
     }
   ngOnInit(): void {
+    this.getsubcategorias();
     this.getProductos();
-    this.getCategorias();
   }
   getProductos(): void {
-    this.productos = [];
+    this.proServ.findAllDesc('todos').subscribe(res => {
+      this.productos = res;
+    });
   }
-  getCategorias(): void {
-    this.categorias = [];
+  getsubcategorias(): void {
+    this.subcatServ.getsubcategorias().subscribe(res => {
+      this.subcategorias = res;
+    });
   }
   nuevoFiltro(id: number): Producto[] {
     const result: Producto[] = [];

@@ -1,14 +1,31 @@
-
+<h4 *ngIf="!productos">Cargando..</h4>
 <div style="text-align:center">
-  <owl-carousel class="carousel" [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
-  <div class="item" *ngFor="let item of productos;let i = index">
-      <img [src]="item.img" />
+  <owl-carousel *ngIf="productos" class="carousel" [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
+  <div class="item" *ngFor="let pro of productos;let i = index">
+      <img src="{{baseurl}}api/uploads/img/{{pro.img}}" />
   </div>
 </owl-carousel>
 </div>
 
 
+
+
 <!--
+<div style="text-align:center">
+  <owl-carousel class="carousel" [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
+  <div class="item" *ngFor="let img of images;let i = index">
+    <div class="thumbnail-image">
+      <img [src]="img.src" />
+    </div>
+  </div>
+</owl-carousel>
+</div>
+-->
+
+<!--
+  <img *ngIf="item?.img" src="{{baseurl}}api/uploads/img/{{item.img}}">
+    <img *ngIf="!item?.img" src="assets/images/noimage.jpg">
+
 <owl-carousel class="carousel" [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
   <div class="item" *ngFor="let image of images;let i = index">
     <div class="thumbnail-image">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
+import { BaseurlService } from 'src/app/shared/baseurl.service';
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
@@ -11,9 +12,17 @@ export class SliderComponent implements OnInit {
   public isMobile = false;
   carouselOptions = {};
   productos: Producto[];
+  baseurl = '';
+  images = [
+    {src: 'https://www.consurshop.com/images/product/81xl8Klf-kL._AC_SL1500_.jpg'},
+    {src: 'https://s23527.pcdn.co/wp-content/uploads/2018/09/gopro-her-7.jpg.optimal.jpg'},
+    {src: 'https://i.ytimg.com/vi/o53Q4H8M61g/maxresdefault.jpg'}
+  ];
   constructor(
     breakpointObserver: BreakpointObserver,
-    private proServ: ProductoService) {
+    private proServ: ProductoService,
+    public base: BaseurlService) {
+    this.baseurl = this.base.getBaseUrl();
     breakpointObserver.observe([
       Breakpoints.Handset
     ]).subscribe(result => {
@@ -54,8 +63,9 @@ export class SliderComponent implements OnInit {
     this.getProductos();
   }
   getProductos(): void {
-    this.productos = [];
-    //this.productos = this.nuevoFiltro(this.proServ.productos);
+    this.proServ.findAllDesc('todos').subscribe(res => {
+      this.productos = this.nuevoFiltro(res);
+    });
   }
   nuevoFiltro(list: Producto[]): Producto[] {
     const result: Producto[] = [];
@@ -63,7 +73,7 @@ export class SliderComponent implements OnInit {
       if (result.length === 5) {
             break;
       }
-      if (value.estado) {
+      if (value.nuevo === 1) {
           result.push(value);
       }
     }
