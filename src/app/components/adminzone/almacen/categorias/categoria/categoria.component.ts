@@ -20,7 +20,6 @@ export class CategoriaComponent implements OnInit {
  ngOnInit() {
  }
  public guardar(form: Categoria): void {
-   form.descripcion = form.descripcion.toLocaleUpperCase();
    this.loading.openDialog();
    if (!this.catservice.form.get('id').value) {
      form.estado = true;

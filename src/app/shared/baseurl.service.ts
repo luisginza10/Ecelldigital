@@ -10,6 +10,6 @@ export class BaseurlService {
   */
   constructor() { }
   getBaseUrl(): string {
-    return 'http://192.168.0.12:8080/';
+    return 'http://localhost:8080/';
   }
 }

@@ -30,7 +30,7 @@ export class SubcategoriaComponent implements OnInit {
   });
  }
  public guardar(form: Subcategoria): void {
-   form.descripcion = form.descripcion.toLocaleUpperCase();
+   //form.descripcion = form.descripcion.toLocaleUpperCase();
    this.loading.openDialog();
    if (!this.catservice.form.get('id').value) {
      form.estado = true;

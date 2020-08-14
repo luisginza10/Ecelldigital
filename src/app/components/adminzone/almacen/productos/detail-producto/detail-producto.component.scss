@@ -1,0 +1,70 @@
+.wrapper {
+  width: 650px;
+  margin: auto;
+  padding: 25px 0px;
+}
+h1, h4 {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-weight: normal;
+  margin: 0;
+}
+h1 {
+  font-size: 24pt;
+}
+h4 {
+  font-size: 16pt;
+  color: #aaa;
+}
+header {
+  padding: 20px;
+}
+figure {
+  float: left;
+  margin: 20px;
+}
+figure img {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover; /*this makes the image in src fit to the size specified below*/
+    max-width: 230px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    max-height: 200px;
+    border-radius: 5px;
+}
+section {
+  font-family: Tahoma, Arial, sans-serif;
+  line-height: 150%;
+  float: right;
+  width: 300px;
+  color: #333;
+  margin-left: 20px;
+}
+@media(max-width: 600px) {
+  section {
+    font-family: Tahoma, Arial, sans-serif;
+    line-height: 150%;
+    float: left;
+    width: 300px;
+    color: #333;
+  }
+}
+summary {
+  cursor: pointer;
+  font-size: 12pt;
+  outline: 0;
+}
+details {
+  margin: 20px 0px;
+}
+
+.example-card {
+  margin: auto;
+  max-width: 600px;
+}
+.new-image-container{
+  display: flex;
+  margin: auto;
+  button{
+    width: 100%;
+  }
+}

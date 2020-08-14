@@ -21,7 +21,7 @@ export class MarcaComponent implements OnInit {
  ngOnInit() {
  }
  public guardar(form: Marca): void {
-   form.descripcion = form.descripcion.toLocaleUpperCase();
+   //form.descripcion = form.descripcion.toLocaleUpperCase();
    this.loading.openDialog();
    if (!this.service.form.get('id').value) {
      form.estado = true;

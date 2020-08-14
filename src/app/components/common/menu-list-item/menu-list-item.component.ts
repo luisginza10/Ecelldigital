@@ -32,14 +32,24 @@ export class MenuListItemComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  onItemSelected(item: Categoria) {
+  onItemSelected(item: any) {
     if (!item.subcatelist || !item.subcatelist.length) {
-      this.router.navigate(['#']);
+      if (item.admin) {
+        if (item.route === 'exit') {
+            console.log(item.route);
+        } else {
+          this.router.navigate([`/adminzone/${item.route}`]);
+        }
+      } else {
+            console.log(item.id);
+      }
+      //this.router.navigate(['#']);
       //this.navService.closeNav();
     }
     if (item.subcatelist && item.subcatelist.length) {
       this.expanded = !this.expanded;
     }
+
   }
 
 }

@@ -1,6 +1,8 @@
 <mat-nav-list>
   <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
+  <app-menu-list-item *ngFor="let adminitem of adminNavItems" [item]="adminitem"></app-menu-list-item>
 </mat-nav-list>
+
 <!--
 <ul class="list">
   <li class="contain" (click)="toggelSidenav($event)" [routerLink]="['/home']" routerLinkActive="active">

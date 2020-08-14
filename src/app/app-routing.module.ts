@@ -6,6 +6,7 @@ import { ListCategoriaComponent } from './components/adminzone/almacen/categoria
 import { ListMarcaComponent } from './components/adminzone/almacen/marcas/list-marca/list-marca.component';
 import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
 import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcategorias/list-subcategoria/list-subcategoria.component';
+import { DetailProductoComponent } from './components/adminzone/almacen/productos/detail-producto/detail-producto.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: 'listcategorias', component: ListCategoriaComponent},
       {path: 'listsubcategorias', component: ListSubcategoriaComponent},
       {path: 'listmarcas', component: ListMarcaComponent},
-      {path: 'listproductos', component: ListProductoComponent}
+      {path: 'listproductos', component: ListProductoComponent},
+      {path: 'detailproducto', component: DetailProductoComponent}
     ]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

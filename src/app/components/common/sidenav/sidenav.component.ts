@@ -354,6 +354,45 @@ export class SidenavComponent implements OnInit {
   ];
   */
  navItems: Categoria[] = [];
+ adminNavItems: Categoria[] = [
+  {
+    id: 99,
+    descripcion: 'Administración',
+    icono: 'admin_panel_settings',
+    subcatelist: [
+      {
+        admin: true,
+        route: 'listcategorias',
+        descripcion: 'Categorias',
+        icono: null
+      },
+      {
+        admin: true,
+        route: 'listsubcategorias',
+        descripcion: 'Subcategorias',
+        icono: null
+      },
+      {
+        admin: true,
+        route: 'listmarcas',
+        descripcion: 'Marcas',
+        icono: null
+      },
+      {
+        admin: true,
+        route: 'listproductos',
+        descripcion: 'Productos',
+        icono: null
+      },
+      {
+        admin: true,
+        route: 'exit',
+        descripcion: 'Cerrar Sesión',
+        icono: null
+      }
+    ]
+  }
+];
   toggelSidenav(even: any) {
     this.sidenav.emit('toggel');
   }

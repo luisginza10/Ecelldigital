@@ -33,6 +33,7 @@ import { MenuListItemComponent } from './components/common/menu-list-item/menu-l
 import { SubcategoriaService } from './services/subcategoria.service';
 import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcategorias/list-subcategoria/list-subcategoria.component';
 import { SubcategoriaComponent } from './components/adminzone/almacen/subcategorias/subcategoria/subcategoria.component';
+import { DetailProductoComponent } from './components/adminzone/almacen/productos/detail-producto/detail-producto.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -59,7 +60,8 @@ const skltnConfig: SkltnConfig = {
     VerFotoComponent,
     MenuListItemComponent,
     ListSubcategoriaComponent,
-    SubcategoriaComponent
+    SubcategoriaComponent,
+    DetailProductoComponent
   ],
   imports: [
     BrowserModule,

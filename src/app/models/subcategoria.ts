@@ -7,4 +7,6 @@ export class Subcategoria {
   createAt?: Date;
   icono?: string;
   categoria?: Categoria;
+  admin?: boolean;
+  route?: string;
 }
