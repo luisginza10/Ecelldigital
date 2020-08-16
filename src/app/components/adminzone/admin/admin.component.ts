@@ -13,23 +13,4 @@ export class AdminComponent {
   toggelNavbar(event: any) {
     this.drawer.toggle();
   }
-  sideNavMenu = [
-    {
-      title: 'home',
-      link: '/home'
-    },
-    {
-     title: 'products',
-     link: '/products'
-   },
-   {
-     title: 'images',
-     link: ''
-   },
-   {
-     title: 'contact-us',
-     link: ''
-   }
-
-  ];
 }

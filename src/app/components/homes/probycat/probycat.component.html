@@ -1,0 +1,52 @@
+<div class="tiles">
+  <mat-grid-list [cols]="colSize" rowHeight="6:6" gutterSize="5px">
+    <mat-grid-tile *ngFor="let pro of productosFilter"
+        [colspan]="1"
+        [rowspan]="1"
+        [style.background]="'lightblue'">
+          <mat-card>
+            <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
+            <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
+          </mat-card>
+          <mat-grid-tile-footer style="height: 50px">
+            <!--
+            <div style="display:flex; flex-direction:column; align-items:center">
+              <span style="margin: 0; font-weight: bold; font-size: 12px;">{{pro.nombre}}</span>
+              <span class="sky-font">{{pro.preciomin}} U$</span>
+            </div>
+            -->
+            <h4 mat-line>{{pro.nombre}}</h4>
+            <span mat-line>Precio: {{currencyFormatDE(pro.preciomin)}} U$.</span>
+            <button mat-icon-button>
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-grid-tile-footer>
+          <!--
+          <mat-card class="example-card onLoad">
+            <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
+            <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
+            <mat-card-content>
+                <div style="display:flex; flex-direction:column; align-items:center">
+                    <span style="margin: 0; font-weight: bold;">{{pro.nombre}}</span>
+                    <span class="sky-font">{{pro.preciomin}} U$</span>
+                </div>
+            </mat-card-content>
+          </mat-card>
+          -->
+    </mat-grid-tile>
+   </mat-grid-list>
+</div>
+  <!--
+  <ng-container>
+          <mat-card class="example-card onLoad">
+            <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
+            <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
+            <mat-card-content>
+                <div style="display:flex; flex-direction:column; align-items:center">
+                    <span style="margin: 0; font-weight: bold;">{{pro.nombre}}</span>
+                    <span class="sky-font">{{pro.preciomin}} U$</span>
+                </div>
+            </mat-card-content>
+          </mat-card>
+    </ng-container>
+  -->

@@ -7,12 +7,19 @@ import { ListMarcaComponent } from './components/adminzone/almacen/marcas/list-m
 import { ListProductoComponent } from './components/adminzone/almacen/productos/list-producto/list-producto.component';
 import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcategorias/list-subcategoria/list-subcategoria.component';
 import { DetailProductoComponent } from './components/adminzone/almacen/productos/detail-producto/detail-producto.component';
+import { ProbycatComponent } from './components/homes/probycat/probycat.component';
+import { PrincipalComponent } from './components/homes/principal/principal.component';
 
 
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: PrincipalComponent,
+    children: [
+      {path: 'listhome', component: HomeComponent},
+      {path: 'listprobycat', component: ProbycatComponent},
+      {path: 'detailproducto', component: DetailProductoComponent}
+    ]
   },
   {
     path: 'adminzone',
@@ -21,12 +28,11 @@ const routes: Routes = [
       {path: 'listcategorias', component: ListCategoriaComponent},
       {path: 'listsubcategorias', component: ListSubcategoriaComponent},
       {path: 'listmarcas', component: ListMarcaComponent},
-      {path: 'listproductos', component: ListProductoComponent},
-      {path: 'detailproducto', component: DetailProductoComponent}
+      {path: 'listproductos', component: ListProductoComponent}
     ]
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '*', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home/listhome', pathMatch: 'full' },
+  { path: '*', redirectTo: 'home/listhome', pathMatch: 'full' }
 ];
 
 @NgModule({
