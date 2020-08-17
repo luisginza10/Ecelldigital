@@ -41,7 +41,8 @@ export class MenuListItemComponent implements OnInit {
           this.router.navigate([`/adminzone/${item.route}`]);
         }
       } else {
-            console.log(item.id);
+          this.router.navigate(['/home/listprobycat', item.id]);
+          //console.log(item.id);
       }
       //this.router.navigate(['#']);
       //this.navService.closeNav();

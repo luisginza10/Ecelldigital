@@ -39,6 +39,9 @@ export class ProductoService {
   findAllDesc(filtro: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.url}/${filtro}`);
   }
+  findByCat(filtro: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.url}/filtrobycat/${filtro}`);
+  }
   datosIniciales() {
     this.form.controls['promocionar'].setValue(0);
     this.form.controls['nuevo'].setValue(0);

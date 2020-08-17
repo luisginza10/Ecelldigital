@@ -3,6 +3,9 @@ import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
+import { Marcabycat } from 'src/app/models/marcabycat';
+import { MarcaService } from 'src/app/services/marca.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-probycat',
@@ -15,12 +18,16 @@ export class ProbycatComponent implements OnInit {
   public isMobile = false;
   catefilter = 'todos';
   textobuscar = '';
+  marcas: Marcabycat[] = [];
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
+  idcat: number;
   constructor(
     private productoService: ProductoService,
     breakpointObserver: BreakpointObserver,
-    public base: BaseurlService) {
+    public base: BaseurlService,
+    private marcaserv: MarcaService,
+    private activateRouter: ActivatedRoute) {
       this.baseurl = this.base.getBaseUrl();
       //GRID COLUMN
       breakpointObserver.observe([
@@ -36,12 +43,30 @@ export class ProbycatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listar();
+    this.activateRouter.params.subscribe(params => {
+      this.idcat = params.id;
+      if (this.idcat) {
+        this.listmarcasbycat(this.idcat);
+        this.listar(this.idcat);
+      }
+    });
+
   }
-  listar() {
-    this.productoService.findAllDesc(this.catefilter).subscribe(res => {
+  seleccion(event: any) {
+    //this.loading.openDialog();
+    this.catefilter = event.value;
+    console.log(this.catefilter);
+    //this.loading.close();
+  }
+  listar(idsubcat: number) {
+    this.productoService.findByCat(idsubcat).subscribe(res => {
         this.productos = res;
         this.listaInicial();
+    });
+  }
+  listmarcasbycat(idsubcat: number) {
+    this.marcaserv.findByCat(idsubcat).subscribe(res => {
+      this.marcas = res;
     });
   }
   listaInicial() {

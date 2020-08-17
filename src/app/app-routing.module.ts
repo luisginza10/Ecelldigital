@@ -17,7 +17,7 @@ const routes: Routes = [
     component: PrincipalComponent,
     children: [
       {path: 'listhome', component: HomeComponent},
-      {path: 'listprobycat', component: ProbycatComponent},
+      {path: 'listprobycat/:id', component: ProbycatComponent},
       {path: 'detailproducto', component: DetailProductoComponent}
     ]
   },

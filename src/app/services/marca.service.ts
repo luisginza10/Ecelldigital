@@ -6,6 +6,7 @@ import {map, catchError} from 'rxjs/operators';
 import { NotificationService } from '../shared/notification.service';
 import { Marca } from '../models/marca';
 import { BaseurlService } from '../shared/baseurl.service';
+import { Marcabycat } from '../models/marcabycat';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,9 @@ export class MarcaService {
   }
   findByDesc(filtro: string): Observable<Marca[]> {
     return this.http.get<Marca[]>(`${this.url}/filtro/${filtro}`);
+  }
+  findByCat(filtro: number): Observable<Marcabycat[]> {
+    return this.http.get<Marcabycat[]>(`${this.url}/filtrobycat/${filtro}`);
   }
   create(bean: Marca): Observable<Marca> {
     return this.http.post<Marca>(this.url, bean).pipe(
