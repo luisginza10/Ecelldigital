@@ -2,7 +2,8 @@
 <div style="text-align:center">
   <owl-carousel *ngIf="productos" class="carousel" [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
   <div class="item" *ngFor="let pro of productos;let i = index">
-      <img src="{{baseurl}}api/uploads/img/{{pro.img}}" />
+      <img *ngIf="pro?.img" src="{{baseurl}}api/uploads/img/{{pro.img}}">
+      <img *ngIf="!pro?.img" src="assets/images/noimage.jpg">
   </div>
 </owl-carousel>
 </div>

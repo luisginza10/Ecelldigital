@@ -22,6 +22,7 @@ export class ProbycatComponent implements OnInit {
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
   idcat: number;
+  productlength = 2;
   constructor(
     private productoService: ProductoService,
     breakpointObserver: BreakpointObserver,
@@ -52,12 +53,6 @@ export class ProbycatComponent implements OnInit {
     });
 
   }
-  seleccion(event: any) {
-    //this.loading.openDialog();
-    this.catefilter = event.value;
-    console.log(this.catefilter);
-    //this.loading.close();
-  }
   listar(idsubcat: number) {
     this.productoService.findByCat(idsubcat).subscribe(res => {
         this.productos = res;
@@ -72,23 +67,53 @@ export class ProbycatComponent implements OnInit {
   listaInicial() {
     this.productosFilter = [];
     for (const value of this.productos) {
-      if (this.productosFilter.length === 20) {
+      if (this.productosFilter.length === this.productlength) {
           break;
       }
       this.productosFilter.push(value);
     }
   }
   nuevoFiltro(event: string) {
-      if (event.length === 0) { this.listaInicial(); }
-      this.productosFilter = [];
-      for (const value of this.productos) {
-        if (this.productosFilter.length === 20) {
+      this.catefilter = event;
+      if (this.catefilter === 'todos') {
+        this.listaInicial();
+      } else {
+        this.productosFilter = [];
+        for (const value of this.productos) {
+          if (this.productosFilter.length === this.productlength) {
               break;
+          }
+          if (value.marca.descripcion.indexOf(event) !== -1) {
+            this.productosFilter.push(value);
+          }
         }
-        if (value.nombre.indexOf(event.toLocaleUpperCase()) !== -1) {
+      }
+  }
+  actualizaFiltro() {
+    this.productlength += 2;
+    if (this.catefilter === 'todos') {
+      for (const value of this.productos) {
+        if (this.productosFilter.length === this.productlength) {
+            break;
+        }
+        const resultado = this.productosFilter.find( pro => pro.id === value.id );
+        if (!resultado) {
             this.productosFilter.push(value);
         }
       }
+    } else {
+      for (const value of this.productos) {
+        if (this.productosFilter.length === this.productlength) {
+            break;
+        }
+        if (value.marca.descripcion.indexOf(this.catefilter) !== -1) {
+          const resultado = this.productosFilter.find( pro => pro.id === value.id );
+          if (!resultado) {
+              this.productosFilter.push(value);
+          }
+        }
+      }
+    }
   }
   currencyFormatDE(num: any) {
       return (

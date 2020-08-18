@@ -1,7 +1,7 @@
 <div class="tiles">
   <div class="filtrar">
     <mat-form-field style="width: 130px;">
-      <mat-select [value]="'todos'" placeholder="Marcas" (selectionChange)="seleccion($event)">
+      <mat-select [value]="'todos'" placeholder="Marcas" (selectionChange)="nuevoFiltro($event.value)">
         <mat-option value="todos">Todas</mat-option>
         <ng-container *ngFor="let m of marcas">
           <mat-option  [value]="m.descripcion"> {{ m.descripcion }}</mat-option>
@@ -26,7 +26,12 @@
             </button>
           </mat-grid-tile-footer>
     </mat-grid-tile>
-   </mat-grid-list>
+   </mat-grid-list><br>
+   <div class="body" style="padding-bottom: 20px; margin: 0px 20px;">
+    <button *ngIf="productlength  <= productosFilter.length" mat-button mat-raised-button class="viewAllBtn" (click)="actualizaFiltro()">
+    VER MÁS
+    </button>
+  </div>
 </div>
   <!--
   <ng-container>
