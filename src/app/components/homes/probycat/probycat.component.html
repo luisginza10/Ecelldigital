@@ -14,16 +14,13 @@
         [colspan]="1"
         [rowspan]="1"
         [style.background]="'lightblue'">
-          <mat-card>
+          <mat-card (click)="infoProduc(pro)">
             <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
             <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
           </mat-card>
           <mat-grid-tile-footer style="height: 50px">
             <h4 mat-line>{{pro.nombre}}</h4>
             <span mat-line>Precio: {{currencyFormatDE(pro.preciomin)}} U$.</span>
-            <button mat-icon-button>
-              <mat-icon>info</mat-icon>
-            </button>
           </mat-grid-tile-footer>
     </mat-grid-tile>
    </mat-grid-list><br>

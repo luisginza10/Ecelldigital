@@ -94,7 +94,8 @@ const skltnConfig: SkltnConfig = {
     CategoriaComponent,
     ProductoComponent,
     VerFotoComponent,
-    SubcategoriaComponent
+    SubcategoriaComponent,
+    InfoproductComponent
   ],
   bootstrap: [AppComponent]
 })

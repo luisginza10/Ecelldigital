@@ -6,6 +6,8 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -33,7 +35,8 @@ export class HomeComponent implements OnInit {
     sanitizer: DomSanitizer,
     private proServ: ProductoService,
     private subcatServ: SubcategoriaService,
-    public base: BaseurlService) {
+    public base: BaseurlService,
+    public dialog: MatDialog) {
     this.baseurl = this.base.getBaseUrl();
     iconRegistry.addSvgIcon(
       'thumbs-up',
@@ -65,7 +68,19 @@ export class HomeComponent implements OnInit {
     }
     return result;
   }
-  productHome(id: any) {
-    //this.router.navigate(['product/'+id]);
+  infoProduc(pro: Producto) {
+    const dialogConf = new MatDialogConfig();
+    dialogConf.maxWidth = '90vw';
+    dialogConf.width = '350px';
+    dialogConf.data = {producto: pro};
+    const dialogref = this.dialog.open(InfoproductComponent, dialogConf);
+  }
+  currencyFormatDE(num: any) {
+    return (
+      num
+        .toFixed(2) // always two decimal digits
+        .replace('.', ',') // replace decimal point character with ,
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    );
   }
 }

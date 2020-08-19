@@ -1,1 +1,36 @@
-<p>infoproduct works!</p>
+<div class="new-image-container">
+  <div class="example-card">
+
+    <header style="background-color: whitesmoke;">
+      <h1>{{producto.nombre}}</h1>
+      <h4>Lo mejor solo en Celldigital</h4>
+    </header>
+
+    <figure>
+      <img
+        src="{{baseurl}}api/uploads/img/{{producto.img}}">
+    </figure>
+
+    <section>
+      <p>Precio: {{producto.preciomin}} U$.</p>
+      <details>
+        <summary>Especificaciones técnicas</summary>
+        {{producto?.descripcion}}
+        <!--
+        <ul>
+          <li>8 mega pixel camera with full 1080p video recording</li>
+          <li>Siri voice assitant</li>
+          <li>iCloud</li>
+          <li>Air Print</li>
+          <li>Retina display</li>
+          <li>Photo and video geotagging</li>
+        </ul>
+        -->
+      </details>
+      <!--
+      <button>Buy Now</button>
+      -->
+    </section>
+
+  </div>
+</div>

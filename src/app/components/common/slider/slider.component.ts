@@ -3,6 +3,8 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { InfoproductComponent } from '../../homes/infoproduct/infoproduct.component';
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
@@ -21,7 +23,8 @@ export class SliderComponent implements OnInit {
   constructor(
     breakpointObserver: BreakpointObserver,
     private proServ: ProductoService,
-    public base: BaseurlService) {
+    public base: BaseurlService,
+    public dialog: MatDialog) {
     this.baseurl = this.base.getBaseUrl();
     breakpointObserver.observe([
       Breakpoints.Handset
@@ -78,5 +81,12 @@ export class SliderComponent implements OnInit {
       }
     }
     return result;
+  }
+  infoProduc(pro: Producto) {
+    const dialogConf = new MatDialogConfig();
+    dialogConf.maxWidth = '90vw';
+    dialogConf.width = '350px';
+    dialogConf.data = {producto: pro};
+    const dialogref = this.dialog.open(InfoproductComponent, dialogConf);
   }
 }

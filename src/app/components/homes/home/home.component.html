@@ -9,20 +9,24 @@
       <div class="body">
       <!--Todas las Categorias-->
       <ng-container>
-        <mat-card *ngFor="let item of nuevoFiltro(itemcat.id)" class="example-card onLoad" (click)="productHome(item.id)">
+        <mat-card *ngFor="let item of nuevoFiltro(itemcat.id)" class="example-card onLoad" (click)="infoProduc(item)">
           <img *ngIf="item?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{item.img}}">
           <img *ngIf="!item?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
           <mat-card-content>
               <div style="display:flex; flex-direction:column; align-items:center">
-                  <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
-                  <span class="sky-font">{{item.preciomin}} U$</span>
+                <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
+                <br>
+                <span class="sky-font">{{currencyFormatDE(item.preciomin)}} U$</span>
               </div>
           </mat-card-content>
+          <mat-card-footer>
+
+          </mat-card-footer>
         </mat-card>
       </ng-container>
       </div>
       <div class="body" style="padding-bottom: 20px; margin: 0px 20px;">
-        <button mat-button mat-raised-button class="viewAllBtn">
+        <button mat-button mat-raised-button class="vermas" [routerLink]="['/home/listprobycat', itemcat.id]">
         VER MÁS
         </button>
       </div>
@@ -30,6 +34,7 @@
   </div>
 </div>
 <!--
+  <img class="fa fa-whatsapp my-float" style="cursor:pointer" src="assets/images/wpp.svg">
   <div class="body">
       <ng-container *ngIf="!productos">
         <mat-card class="example-card" *ngFor="let item of imageLoad">

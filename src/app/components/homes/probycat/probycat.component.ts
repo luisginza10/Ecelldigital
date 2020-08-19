@@ -6,6 +6,8 @@ import { BaseurlService } from 'src/app/shared/baseurl.service';
 import { Marcabycat } from 'src/app/models/marcabycat';
 import { MarcaService } from 'src/app/services/marca.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 
 @Component({
   selector: 'app-probycat',
@@ -17,18 +19,18 @@ export class ProbycatComponent implements OnInit {
   public colSize = 4;
   public isMobile = false;
   catefilter = 'todos';
-  textobuscar = '';
   marcas: Marcabycat[] = [];
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
   idcat: number;
-  productlength = 2;
+  productlength = 10;
   constructor(
     private productoService: ProductoService,
     breakpointObserver: BreakpointObserver,
     public base: BaseurlService,
     private marcaserv: MarcaService,
-    private activateRouter: ActivatedRoute) {
+    private activateRouter: ActivatedRoute,
+    public dialog: MatDialog) {
       this.baseurl = this.base.getBaseUrl();
       //GRID COLUMN
       breakpointObserver.observe([
@@ -44,6 +46,7 @@ export class ProbycatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.productlength = 10;
     this.activateRouter.params.subscribe(params => {
       this.idcat = params.id;
       if (this.idcat) {
@@ -90,7 +93,7 @@ export class ProbycatComponent implements OnInit {
       }
   }
   actualizaFiltro() {
-    this.productlength += 2;
+    this.productlength += 5;
     if (this.catefilter === 'todos') {
       for (const value of this.productos) {
         if (this.productosFilter.length === this.productlength) {
@@ -114,6 +117,13 @@ export class ProbycatComponent implements OnInit {
         }
       }
     }
+  }
+  infoProduc(pro: Producto) {
+    const dialogConf = new MatDialogConfig();
+    dialogConf.maxWidth = '90vw';
+    dialogConf.width = '350px';
+    dialogConf.data = {producto: pro};
+    const dialogref = this.dialog.open(InfoproductComponent, dialogConf);
   }
   currencyFormatDE(num: any) {
       return (
