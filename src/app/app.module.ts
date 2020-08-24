@@ -37,6 +37,7 @@ import { DetailProductoComponent } from './components/adminzone/almacen/producto
 import { ProbycatComponent } from './components/homes/probycat/probycat.component';
 import { PrincipalComponent } from './components/homes/principal/principal.component';
 import { InfoproductComponent } from './components/homes/infoproduct/infoproduct.component';
+import { EmpleadoComponent } from './components/adminzone/entidades/empleados/empleado/empleado.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -67,7 +68,8 @@ const skltnConfig: SkltnConfig = {
     DetailProductoComponent,
     ProbycatComponent,
     PrincipalComponent,
-    InfoproductComponent
+    InfoproductComponent,
+    EmpleadoComponent
   ],
   imports: [
     BrowserModule,
