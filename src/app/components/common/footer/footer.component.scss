@@ -1,3 +1,4 @@
+
 .footer{
   margin: 0px;
   padding: 0px;
@@ -5,10 +6,10 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   //position: fixed;
+  margin-top: 80px;
   bottom: 0px;
   width: 100%;
   background: #111;
-
 }
 .main-content{
   display: flex;
@@ -17,6 +18,7 @@
   flex-basis: 50%;
   padding: 10px 20px;
 }
+
 .box h2{
   font-size: 1.125rem;
   font-weight: 600;
@@ -26,7 +28,8 @@
   margin: 20px 0 0 0;
   position: relative;
 }
-.box .content::before{
+
+.box .content:before{
   position: absolute;
   content: '';
   top: -10px;
@@ -34,7 +37,8 @@
   width: 100%;
   background: #1a1a1a;
 }
-.box .content::after{
+
+.box .content:after{
   position: absolute;
   content: '';
   height: 2px;
@@ -87,6 +91,7 @@
 .center .content .phone{
   margin: 10px 0;
 }
+
 .right form .text{
   font-size: 1.0625rem;
   margin-bottom: 2px;
@@ -97,7 +102,7 @@
 
 }
 .right form input, .right form textarea{
-  width: 80%;
+  width: 70%;
   font-size: 1.0625rem;
   background: #151515;
   color: white;
@@ -114,10 +119,8 @@
 }
 .right form button{
   margin-top: 10px;
-}
-.right form button{
   height: 40px;
-  width: 80%;
+  width: 70%;
   border: none;
   outline: none;
   background: #f12020;
@@ -130,17 +133,7 @@
 .right form button:hover{
   background: #000;
 }
-button{
-  width: 80%;
-}
-.createby{
-  margin: auto;
-  text-align: center;
-}
-.createby a{
-  color: #f12020;
-  text-decoration: none;
-}
+
 @media screen and (max-width:900px){
   .footer{
     position: relative;
@@ -152,6 +145,14 @@ button{
   }
   .main-content .box{
     margin: 5px 0;
+  }
+}
+.createby{
+  margin: auto;
+  text-align: center;
+  a{
+    color: #f12020;
+    text-decoration: none;
   }
 }
 /*
