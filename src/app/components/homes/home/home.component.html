@@ -15,11 +15,19 @@
           <img *ngIf="!item?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
           <mat-card-content>
               <div style="display:flex; flex-direction:column; align-items:center">
-                <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
-                <br>
                 <span class="sky-font">{{currencyFormatDE(item.preciomin)}} U$</span>
+                <br>
+                <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
               </div>
           </mat-card-content>
+          <mat-card-footer>
+            <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
+            <!--
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
+            </div>
+            -->
+          </mat-card-footer>
         </mat-card>
       </ng-container>
       </div>

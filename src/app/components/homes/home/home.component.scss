@@ -166,11 +166,12 @@ mat-card {
   cursor: pointer !important;
   position: relative;
   overflow: hidden;
-.fab {
-    z-index: 0;
-    position: absolute;
-}
-
+  .fab {
+      z-index: 0;
+      position: absolute;
+  }
+  border-bottom-style: groove;
+  border-color: cornflowerblue;
 }
 
 mat-card img{
@@ -190,6 +191,12 @@ mat-card:hover{
     flex-direction: row-reverse;
     width: 90%;
   }
+}
+.mat-card-footer {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
 }
 /*whatSapp
   .float{
