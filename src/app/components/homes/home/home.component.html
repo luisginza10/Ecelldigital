@@ -1,5 +1,6 @@
 <app-slider></app-slider>
-
+<div class="productbox-container">
+  <div class="banner-box"></div>
 <div class="products-container">
   <div *ngFor="let itemcat of subcategorias">
     <div *ngIf="nuevoFiltro(itemcat.id).length > 0">
@@ -29,6 +30,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!--
   <img class="fa fa-whatsapp my-float" style="cursor:pointer" src="assets/images/wpp.svg">

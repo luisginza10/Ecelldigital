@@ -41,7 +41,7 @@ export class SliderComponent implements OnInit {
           loop: true,
           margin: 3,
           autoplay: true,
-          autoHeight: true,
+          autoHeight: false,
           autoHeightClass: 'owl-height',
         };
       } else {
@@ -55,7 +55,7 @@ export class SliderComponent implements OnInit {
           loop: true,
           margin: 10,
           autoplay: true,
-          autoHeight: true,
+          autoHeight: false,
           autoHeightClass: 'owl-height',
         };
       }
