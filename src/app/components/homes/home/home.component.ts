@@ -8,12 +8,17 @@ import { Subcategoria } from 'src/app/models/subcategoria';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  productosFilter: Producto[] = [];
   carouselOptions = {
     items: 1,
     dots: false,
@@ -25,9 +30,7 @@ export class HomeComponent implements OnInit {
     autoHeight: true,
     autoHeightClass: 'owl-height',
   };
-  imageLoad = new Array(1);
   productos: Producto[] = [];
-  filterNotes: Producto[];
   subcategorias: Subcategoria[] = [];
   baseurl = '';
   constructor(
@@ -45,6 +48,24 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getsubcategorias();
     this.getProductos();
+  }
+  nuevoFiltrobus(event: string) {
+    this.productosFilter = [];
+    for (const value of this.productos) {
+      if (this.productosFilter.length === 20) {
+            break;
+      }
+      if (value.nombre.indexOf(event.toLocaleUpperCase()) !== -1) {
+          this.productosFilter.push(value);
+      }
+    }
+  }
+  mostrarProducto(producto?: Producto): string | undefined {
+    return producto ? producto.nombre : undefined;
+  }
+  seleccionProducto(event: MatAutocompleteSelectedEvent) {
+    const pro: Producto = event.option.value as Producto;
+    console.log(pro);
   }
   getProductos(): void {
     this.proServ.findAllDesc('todos').subscribe(res => {

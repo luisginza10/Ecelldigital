@@ -1,7 +1,53 @@
 <app-slider></app-slider>
 <div class="productbox-container">
-  <div class="banner-box"></div>
+  <div class="banner">
+    <ng-container>
+        <mat-card style="height: 430px; width: 320px;">
+          <img mat-card-image src="assets/images/Game.jpg">
+        </mat-card>
+    </ng-container>
+    <ng-container style="margin-top: 20px;">
+      <mat-card style="height: 430px; width: 320px;">
+        <img mat-card-image src="assets/images/Celulares.jpg">
+      </mat-card>
+    </ng-container>
+    <ng-container style="margin-top: 20px;">
+      <mat-card style="height: 430px; width: 320px;">
+        <img mat-card-image src="assets/images/Electronicos.jpg">
+      </mat-card>
+    </ng-container>
+  </div>
 <div class="products-container">
+  <div class="buscar">
+    <div id="demo-2">
+
+      <input type="search" (keyup)="nuevoFiltrobus($event.target.value)" placeholder="Hola.!, ¿Qué buscas en CellDigital?" [matAutocomplete]="auto" #busqueda>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
+        <mat-option *ngFor="let producto of productosFilter" [value]="producto">
+          {{producto.nombre}}
+        </mat-option>
+      </mat-autocomplete>
+      <!--
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
+            <mat-option *ngFor="let producto of productosFilter | async" [value]="producto">
+              {{producto.nombre}}
+            </mat-option>
+          </mat-autocomplete>
+      -->
+      <!--
+      <form [formGroup]="form">
+        <mat-form-field style="width: 307px;">
+          <input type="search" placeholder="Hola.!, ¿Qué buscas en CellDigital?" matInput [formControl]="myControlProducto" formControlName="producto" [matAutocomplete]="auto" #busqueda>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
+            <mat-option *ngFor="let producto of filteredProduc | async" [value]="producto">
+              {{producto.nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      -->
+    </div>
+  </div><br>
   <div *ngFor="let itemcat of subcategorias">
     <div *ngIf="nuevoFiltro(itemcat.id).length > 0">
       <div class="title">
@@ -22,11 +68,6 @@
           </mat-card-content>
           <mat-card-footer>
             <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
-            <!--
-            <div style="display:flex; flex-direction:column; align-items:center;">
-              <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
-            </div>
-            -->
           </mat-card-footer>
         </mat-card>
       </ng-container>

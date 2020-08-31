@@ -2,6 +2,18 @@
   height: 110px;
   width: 220px;
 }
+.envios{
+  margin-top: 15px;
+  margin-left: 10px;
+  max-height: 110px;
+  width: 680px;
+  img{
+    max-height: 110px;
+    width: 680px;
+    border-radius: 10px;
+    margin-left: 60px;
+  }
+}
 .contact-box{
   background: #262626;
   display: flex;
@@ -62,7 +74,10 @@
 @media (max-width: 1080px) {
   .logo a img{
     height: 80px;
-    width: 110px;
+    width: 120px;
+  }
+  .envios{
+    display: none;
   }
   .header-container{
     height: 100px;
