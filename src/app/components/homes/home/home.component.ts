@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Producto } from 'src/app/models/producto';
@@ -18,6 +18,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('busqueda', {static: true}) busqueda: any;
+  form = new FormGroup({
+    busqueda: new FormControl(''),
+  });
   productosFilter: Producto[] = [];
   carouselOptions = {
     items: 1,
@@ -65,7 +69,8 @@ export class HomeComponent implements OnInit {
   }
   seleccionProducto(event: MatAutocompleteSelectedEvent) {
     const pro: Producto = event.option.value as Producto;
-    console.log(pro);
+    this.infoProduc(pro);
+    this.form.controls['busqueda'].setValue('');
   }
   getProductos(): void {
     this.proServ.findAllDesc('todos').subscribe(res => {
@@ -91,6 +96,8 @@ export class HomeComponent implements OnInit {
   }
   infoProduc(pro: Producto) {
     const dialogConf = new MatDialogConfig();
+    dialogConf.disableClose = true;
+    dialogConf.autoFocus = true;
     dialogConf.maxWidth = '90vw';
     dialogConf.width = '350px';
     dialogConf.data = {producto: pro};

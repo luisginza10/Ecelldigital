@@ -19,34 +19,16 @@
   </div>
 <div class="products-container">
   <div class="buscar">
+    <form [formGroup]="form">
     <div id="demo-2">
-
-      <input type="search" (keyup)="nuevoFiltrobus($event.target.value)" placeholder="Hola.!, ¿Qué buscas en CellDigital?" [matAutocomplete]="auto" #busqueda>
+      <input type="search" (keyup)="nuevoFiltrobus($event.target.value)" placeholder="Hola.!, ¿Qué buscas en CellDigital?" formControlName="busqueda" [matAutocomplete]="auto" #busqueda>
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
         <mat-option *ngFor="let producto of productosFilter" [value]="producto">
           {{producto.nombre}}
         </mat-option>
       </mat-autocomplete>
-      <!--
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
-            <mat-option *ngFor="let producto of productosFilter | async" [value]="producto">
-              {{producto.nombre}}
-            </mat-option>
-          </mat-autocomplete>
-      -->
-      <!--
-      <form [formGroup]="form">
-        <mat-form-field style="width: 307px;">
-          <input type="search" placeholder="Hola.!, ¿Qué buscas en CellDigital?" matInput [formControl]="myControlProducto" formControlName="producto" [matAutocomplete]="auto" #busqueda>
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
-            <mat-option *ngFor="let producto of filteredProduc | async" [value]="producto">
-              {{producto.nombre}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form>
-      -->
     </div>
+    </form>
   </div><br>
   <div *ngFor="let itemcat of subcategorias">
     <div *ngIf="nuevoFiltro(itemcat.id).length > 0">

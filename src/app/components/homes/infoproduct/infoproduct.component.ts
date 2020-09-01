@@ -20,5 +20,7 @@ export class InfoproductComponent implements OnInit {
   ngOnInit(): void {
     this.producto = this.data.producto;
   }
-
+  public cerrar(): void {
+    this.dialogRef.close();
+  }
 }

@@ -1,35 +1,24 @@
-<div class="new-image-container">
+<mat-toolbar>
+  <h2 style="font-weight: bold;">Información</h2>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="cerrar()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<div class="new-image-container" style="margin-top: 5px;">
   <div class="example-card">
-
     <header style="background-color: whitesmoke;">
-      <h1>{{producto.nombre}}</h1>
-      <h4>Lo mejor solo en Celldigital</h4>
+      <h2>{{producto.nombre}}</h2>
+      <!--<h4>Lo mejor solo en Celldigital</h4>-->
     </header>
-
     <figure>
       <img
         src="{{baseurl}}api/uploads/img/{{producto.img}}">
     </figure>
-
     <section>
-      <p>Precio: {{producto.preciomin}} U$.</p>
+      <h2 style="font-weight: bold; color: orangered;">Precio: {{producto.preciomin}} U$.</h2>
       <details>
         <summary>Especificaciones técnicas</summary>
         {{producto?.descripcion}}
-        <!--
-        <ul>
-          <li>8 mega pixel camera with full 1080p video recording</li>
-          <li>Siri voice assitant</li>
-          <li>iCloud</li>
-          <li>Air Print</li>
-          <li>Retina display</li>
-          <li>Photo and video geotagging</li>
-        </ul>
-        -->
       </details>
-      <!--
-      <button>Buy Now</button>
-      -->
     </section>
 
   </div>
