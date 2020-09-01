@@ -9,9 +9,8 @@ import { BaseurlService } from 'src/app/shared/baseurl.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -43,7 +42,8 @@ export class HomeComponent implements OnInit {
     private proServ: ProductoService,
     private subcatServ: SubcategoriaService,
     public base: BaseurlService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    public router: Router) {
     this.baseurl = this.base.getBaseUrl();
     iconRegistry.addSvgIcon(
       'thumbs-up',
@@ -71,6 +71,12 @@ export class HomeComponent implements OnInit {
     const pro: Producto = event.option.value as Producto;
     this.infoProduc(pro);
     this.form.controls['busqueda'].setValue('');
+  }
+  enterbuscar(event: any) {
+    const filter: string = event as string;
+    if (filter !== '') {
+      this.router.navigate(['/home/listprobydesc', filter]);
+    }
   }
   getProductos(): void {
     this.proServ.findAllDesc('todos').subscribe(res => {

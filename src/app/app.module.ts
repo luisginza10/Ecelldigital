@@ -38,6 +38,8 @@ import { ProbycatComponent } from './components/homes/probycat/probycat.componen
 import { PrincipalComponent } from './components/homes/principal/principal.component';
 import { InfoproductComponent } from './components/homes/infoproduct/infoproduct.component';
 import { EmpleadoComponent } from './components/adminzone/entidades/empleados/empleado/empleado.component';
+import { ProbycatpadreComponent } from './components/homes/probycatpadre/probycatpadre.component';
+import { ProbydescComponent } from './components/homes/probydesc/probydesc.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -69,7 +71,9 @@ const skltnConfig: SkltnConfig = {
     ProbycatComponent,
     PrincipalComponent,
     InfoproductComponent,
-    EmpleadoComponent
+    EmpleadoComponent,
+    ProbycatpadreComponent,
+    ProbydescComponent
   ],
   imports: [
     BrowserModule,

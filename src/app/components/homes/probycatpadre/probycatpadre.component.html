@@ -1,0 +1,29 @@
+<div class="buscar">
+  <div id="demo-2">
+    <input type="search" (keyup)="nuevoFiltro($event.target.value)" placeholder="Hola.!, ¿Qué buscas en CellDigital?">
+  </div>
+</div><br>
+<div class="body">
+  <!--Todas las Categorias-->
+  <ng-container>
+    <mat-card *ngFor="let item of productosFilter" class="example-card onLoad" (click)="infoProduc(item)">
+      <img *ngIf="item?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{item.img}}">
+      <img *ngIf="!item?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
+      <mat-card-content>
+          <div style="display:flex; flex-direction:column; align-items:center">
+            <span class="sky-font">{{currencyFormatDE(item.preciomin)}} U$</span>
+            <br>
+            <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
+          </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
+      </mat-card-footer>
+    </mat-card>
+  </ng-container>
+  </div><br>
+  <div class="body2" style="padding-bottom: 20px; margin: 0px 20px;">
+    <button *ngIf="productlength  <= productosFilter.length" mat-button mat-raised-button class="viewAllBtn" (click)="actualizaFiltro()">
+    VER MÁS
+    </button>
+  </div>

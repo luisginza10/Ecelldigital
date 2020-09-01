@@ -2,17 +2,17 @@
 <div class="productbox-container">
   <div class="banner">
     <ng-container>
-        <mat-card style="height: 430px; width: 320px;">
+        <mat-card style="height: 430px; width: 320px;" [routerLink]="['/home/listprobycatpadre', 2]">
           <img mat-card-image src="assets/images/Game.jpg">
         </mat-card>
     </ng-container>
     <ng-container style="margin-top: 20px;">
-      <mat-card style="height: 430px; width: 320px;">
+      <mat-card style="height: 430px; width: 320px;" [routerLink]="['/home/listprobycatpadre', 3]">
         <img mat-card-image src="assets/images/Celulares.jpg">
       </mat-card>
     </ng-container>
     <ng-container style="margin-top: 20px;">
-      <mat-card style="height: 430px; width: 320px;">
+      <mat-card style="height: 430px; width: 320px;" [routerLink]="['/home/listprobycatpadre', 4]">
         <img mat-card-image src="assets/images/Electronicos.jpg">
       </mat-card>
     </ng-container>
@@ -21,7 +21,8 @@
   <div class="buscar">
     <form [formGroup]="form">
     <div id="demo-2">
-      <input type="search" (keyup)="nuevoFiltrobus($event.target.value)" placeholder="Hola.!, ¿Qué buscas en CellDigital?" formControlName="busqueda" [matAutocomplete]="auto" #busqueda>
+      <input type="search" (keyup)="nuevoFiltrobus($event.target.value)" (keyup.enter)="enterbuscar($event.target.value)"
+      placeholder="Hola.!, ¿Qué buscas en CellDigital?" formControlName="busqueda" [matAutocomplete]="auto" #busqueda>
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarProducto" (optionSelected)="seleccionProducto($event)">
         <mat-option *ngFor="let producto of productosFilter" [value]="producto">
           {{producto.nombre}}

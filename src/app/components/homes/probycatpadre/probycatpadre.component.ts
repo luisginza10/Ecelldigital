@@ -1,31 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
-import { Marcabycat } from 'src/app/models/marcabycat';
-import { MarcaService } from 'src/app/services/marca.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
-  selector: 'app-probycat',
-  templateUrl: './probycat.component.html',
-  styleUrls: ['./probycat.component.scss']
+  selector: 'app-probycatpadre',
+  templateUrl: './probycatpadre.component.html',
+  styleUrls: ['./probycatpadre.component.scss']
 })
-export class ProbycatComponent implements OnInit {
+export class ProbycatpadreComponent implements OnInit {
+  @ViewChild('busqueda', {static: true}) busqueda: any;
+  form = new FormGroup({
+    busqueda: new FormControl(''),
+  });
   baseurl = '';
-  catefilter = 'todos';
-  marcas: Marcabycat[] = [];
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
+  filter = '';
   idcat: number;
   productlength = 10;
   constructor(
     private productoService: ProductoService,
     public base: BaseurlService,
-    private marcaserv: MarcaService,
     private activateRouter: ActivatedRoute,
     public dialog: MatDialog) {
       this.baseurl = this.base.getBaseUrl();
@@ -36,21 +37,15 @@ export class ProbycatComponent implements OnInit {
     this.activateRouter.params.subscribe(params => {
       this.idcat = params.id;
       if (this.idcat) {
-        this.listmarcasbycat(this.idcat);
+        //console.log(this.filterdesc);
         this.listar(this.idcat);
       }
     });
-
   }
-  listar(idsubcat: number) {
-    this.productoService.findByCat(idsubcat).subscribe(res => {
+  listar(id: number) {
+    this.productoService.findByCatPadre(id).subscribe(res => {
         this.productos = res;
         this.listaInicial();
-    });
-  }
-  listmarcasbycat(idsubcat: number) {
-    this.marcaserv.findByCat(idsubcat).subscribe(res => {
-      this.marcas = res;
     });
   }
   listaInicial() {
@@ -62,48 +57,48 @@ export class ProbycatComponent implements OnInit {
       this.productosFilter.push(value);
     }
   }
-  nuevoFiltro(event: string) {
-      this.catefilter = event;
-      if (this.catefilter === 'todos') {
-        this.listaInicial();
-      } else {
-        this.productosFilter = [];
-        for (const value of this.productos) {
-          if (this.productosFilter.length === this.productlength) {
-              break;
-          }
-          if (value.marca.descripcion.indexOf(event) !== -1) {
-            this.productosFilter.push(value);
-          }
-        }
-      }
-  }
-  actualizaFiltro() {
-    this.productlength += 5;
-    if (this.catefilter === 'todos') {
+  nuevoFiltro(event: any) {
+    this.filter = event as string;
+    if (this.filter === '') {
+      this.listaInicial();
+    } else {
+      this.productosFilter = [];
       for (const value of this.productos) {
         if (this.productosFilter.length === this.productlength) {
             break;
         }
+        if (value.nombre.indexOf(this.filter.toLocaleUpperCase()) !== -1) {
+          this.productosFilter.push(value);
+        }
+      }
+    }
+}
+actualizaFiltro() {
+  this.productlength += 5;
+  if (this.filter === '') {
+    for (const value of this.productos) {
+      if (this.productosFilter.length === this.productlength) {
+          break;
+      }
+      const resultado = this.productosFilter.find( pro => pro.id === value.id );
+      if (!resultado) {
+          this.productosFilter.push(value);
+      }
+    }
+  } else {
+    for (const value of this.productos) {
+      if (this.productosFilter.length === this.productlength) {
+          break;
+      }
+      if (value.nombre.indexOf(this.filter) !== -1) {
         const resultado = this.productosFilter.find( pro => pro.id === value.id );
         if (!resultado) {
             this.productosFilter.push(value);
         }
       }
-    } else {
-      for (const value of this.productos) {
-        if (this.productosFilter.length === this.productlength) {
-            break;
-        }
-        if (value.marca.descripcion.indexOf(this.catefilter) !== -1) {
-          const resultado = this.productosFilter.find( pro => pro.id === value.id );
-          if (!resultado) {
-              this.productosFilter.push(value);
-          }
-        }
-      }
     }
   }
+}
   infoProduc(pro: Producto) {
     const dialogConf = new MatDialogConfig();
     dialogConf.maxWidth = '90vw';

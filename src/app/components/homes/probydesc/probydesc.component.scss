@@ -1,6 +1,3 @@
-.filtrar {
-  padding: 15px;
-}
 .body {
   display: flex;
   margin-top: 10px;
@@ -129,51 +126,3 @@ mat-card:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
-/*
-.filtrar {
-  padding: 15px;
-}
-.tiles{
-  max-width: 1200px;
-  margin: auto;
-  mat-card{
-    width: 234px;
-    height: 234px;
-    overflow: hidden;
-    .productImg {
-      max-height: 234px;
-      max-width: 234px;
-    }
-  }
-}
-@media (max-width: 1080px) {
-  .tiles{
-    margin: 8px;
-    mat-card{
-      width: 174px;
-      height: 174px;
-      overflow: hidden;
-      .productImg {
-        max-height: 174px;
-        max-width: 174px;
-      }
-    }
-  }
-}
-#add-button{
-  top: 5px;
-  right: 5px;
-  position: absolute;
-}
-.viewAllBtn{
-  border-radius: 0;
-  color: white;
-  background-color:black;
-}
-.body{
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-*/

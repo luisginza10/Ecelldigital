@@ -9,6 +9,8 @@ import { ListSubcategoriaComponent } from './components/adminzone/almacen/subcat
 import { DetailProductoComponent } from './components/adminzone/almacen/productos/detail-producto/detail-producto.component';
 import { ProbycatComponent } from './components/homes/probycat/probycat.component';
 import { PrincipalComponent } from './components/homes/principal/principal.component';
+import { ProbycatpadreComponent } from './components/homes/probycatpadre/probycatpadre.component';
+import { ProbydescComponent } from './components/homes/probydesc/probydesc.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
     children: [
       {path: 'listhome', component: HomeComponent},
       {path: 'listprobycat/:id', component: ProbycatComponent},
+      {path: 'listprobycatpadre/:id', component: ProbycatpadreComponent},
+      {path: 'listprobydesc/:filter', component: ProbydescComponent},
       {path: 'detailproducto', component: DetailProductoComponent}
     ]
   },

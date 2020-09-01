@@ -1,4 +1,3 @@
-<div class="tiles">
   <div class="filtrar">
     <mat-form-field style="width: 130px;">
       <mat-select [value]="'todos'" placeholder="Marcas" (selectionChange)="nuevoFiltro($event.value)">
@@ -9,6 +8,33 @@
       </mat-select>
     </mat-form-field>
   </div>
+
+  <div class="body">
+    <!--Todas las Categorias-->
+    <ng-container>
+      <mat-card *ngFor="let item of productosFilter" class="example-card onLoad" (click)="infoProduc(item)">
+        <img *ngIf="item?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{item.img}}">
+        <img *ngIf="!item?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
+        <mat-card-content>
+            <div style="display:flex; flex-direction:column; align-items:center">
+              <span class="sky-font">{{currencyFormatDE(item.preciomin)}} U$</span>
+              <br>
+              <span style="margin: 0; font-weight: bold;">{{item.nombre}}</span>
+            </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <span style="margin: 0; color: gray;">Cód.{{item.id}}</span>
+        </mat-card-footer>
+      </mat-card>
+    </ng-container>
+    </div><br>
+    <div class="body2" style="padding-bottom: 20px; margin: 0px 20px;">
+      <button *ngIf="productlength  <= productosFilter.length" mat-button mat-raised-button class="viewAllBtn" (click)="actualizaFiltro()">
+      VER MÁS
+      </button>
+    </div>
+
+  <!--
   <mat-grid-list [cols]="colSize" rowHeight="6:6" gutterSize="5px">
     <mat-grid-tile *ngFor="let pro of productosFilter"
         [colspan]="1"
@@ -29,30 +55,4 @@
     VER MÁS
     </button>
   </div>
-</div>
-  <!--
-  <ng-container>
-          <mat-card class="example-card onLoad">
-            <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
-            <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
-            <mat-card-content>
-                <div style="display:flex; flex-direction:column; align-items:center">
-                    <span style="margin: 0; font-weight: bold;">{{pro.nombre}}</span>
-                    <span class="sky-font">{{pro.preciomin}} U$</span>
-                </div>
-            </mat-card-content>
-          </mat-card>
-    </ng-container>
   -->
-<!--
-<mat-card class="example-card onLoad">
-            <img *ngIf="pro?.img" class="productImg" mat-card-image src="{{baseurl}}api/uploads/img/{{pro.img}}">
-            <img *ngIf="!pro?.img" class="productImg" mat-card-image src="assets/images/noimage.jpg">
-            <mat-card-content>
-                <div style="display:flex; flex-direction:column; align-items:center">
-                    <span style="margin: 0; font-weight: bold;">{{pro.nombre}}</span>
-                    <span class="sky-font">{{pro.preciomin}} U$</span>
-        </div>
-    </mat-card-content>
-</mat-card>
--->

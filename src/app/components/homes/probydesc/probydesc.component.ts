@@ -1,31 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { BaseurlService } from 'src/app/shared/baseurl.service';
-import { Marcabycat } from 'src/app/models/marcabycat';
-import { MarcaService } from 'src/app/services/marca.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 
 @Component({
-  selector: 'app-probycat',
-  templateUrl: './probycat.component.html',
-  styleUrls: ['./probycat.component.scss']
+  selector: 'app-probydesc',
+  templateUrl: './probydesc.component.html',
+  styleUrls: ['./probydesc.component.scss']
 })
-export class ProbycatComponent implements OnInit {
+export class ProbydescComponent implements OnInit {
   baseurl = '';
-  catefilter = 'todos';
-  marcas: Marcabycat[] = [];
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
-  idcat: number;
+  filterdesc: string;
   productlength = 10;
   constructor(
     private productoService: ProductoService,
     public base: BaseurlService,
-    private marcaserv: MarcaService,
     private activateRouter: ActivatedRoute,
     public dialog: MatDialog) {
       this.baseurl = this.base.getBaseUrl();
@@ -34,23 +28,17 @@ export class ProbycatComponent implements OnInit {
   ngOnInit(): void {
     this.productlength = 10;
     this.activateRouter.params.subscribe(params => {
-      this.idcat = params.id;
-      if (this.idcat) {
-        this.listmarcasbycat(this.idcat);
-        this.listar(this.idcat);
+      this.filterdesc = params.filter;
+      if (this.filterdesc) {
+        //console.log(this.filterdesc);
+        this.listar(this.filterdesc);
       }
     });
-
   }
-  listar(idsubcat: number) {
-    this.productoService.findByCat(idsubcat).subscribe(res => {
+  listar(filter: string) {
+    this.productoService.findByDesc(filter).subscribe(res => {
         this.productos = res;
         this.listaInicial();
-    });
-  }
-  listmarcasbycat(idsubcat: number) {
-    this.marcaserv.findByCat(idsubcat).subscribe(res => {
-      this.marcas = res;
     });
   }
   listaInicial() {
@@ -62,25 +50,8 @@ export class ProbycatComponent implements OnInit {
       this.productosFilter.push(value);
     }
   }
-  nuevoFiltro(event: string) {
-      this.catefilter = event;
-      if (this.catefilter === 'todos') {
-        this.listaInicial();
-      } else {
-        this.productosFilter = [];
-        for (const value of this.productos) {
-          if (this.productosFilter.length === this.productlength) {
-              break;
-          }
-          if (value.marca.descripcion.indexOf(event) !== -1) {
-            this.productosFilter.push(value);
-          }
-        }
-      }
-  }
   actualizaFiltro() {
-    this.productlength += 5;
-    if (this.catefilter === 'todos') {
+      this.productlength += 5;
       for (const value of this.productos) {
         if (this.productosFilter.length === this.productlength) {
             break;
@@ -90,19 +61,6 @@ export class ProbycatComponent implements OnInit {
             this.productosFilter.push(value);
         }
       }
-    } else {
-      for (const value of this.productos) {
-        if (this.productosFilter.length === this.productlength) {
-            break;
-        }
-        if (value.marca.descripcion.indexOf(this.catefilter) !== -1) {
-          const resultado = this.productosFilter.find( pro => pro.id === value.id );
-          if (!resultado) {
-              this.productosFilter.push(value);
-          }
-        }
-      }
-    }
   }
   infoProduc(pro: Producto) {
     const dialogConf = new MatDialogConfig();
@@ -119,4 +77,5 @@ export class ProbycatComponent implements OnInit {
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
       );
     }
+
 }

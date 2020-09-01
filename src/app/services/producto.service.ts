@@ -40,7 +40,10 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${this.url}/${filtro}`);
   }
   findByCat(filtro: number): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.url}/filtrobycat/${filtro}`);
+    return this.http.get<Producto[]>(`${this.url}/filtrobySubcat/${filtro}`);
+  }
+  findByCatPadre(filtro: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.url}/filtrobyCat/${filtro}`);
   }
   datosIniciales() {
     this.form.controls['promocionar'].setValue(0);
