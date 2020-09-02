@@ -12,7 +12,9 @@ import { PrincipalComponent } from './components/homes/principal/principal.compo
 import { ProbycatpadreComponent } from './components/homes/probycatpadre/probycatpadre.component';
 import { ProbydescComponent } from './components/homes/probydesc/probydesc.component';
 import { ListEmpleadoComponent } from './components/adminzone/entidades/empleados/list-empleado/list-empleado.component';
-
+import { AuthGuard } from './components/auth/guards/auth.guard';
+import { LoginComponent } from './components/auth/login/login.component';
+import { NoauthGuard } from './components/auth/guards/noauth.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'adminzone',
-    component: AdminComponent,
+    component: AdminComponent, canActivate: [AuthGuard],
     children: [
       {path: 'listcategorias', component: ListCategoriaComponent},
       {path: 'listsubcategorias', component: ListSubcategoriaComponent},
@@ -38,7 +40,8 @@ const routes: Routes = [
     ]
   },
   { path: '', redirectTo: 'home/listhome', pathMatch: 'full' },
-  { path: '*', redirectTo: 'home/listhome', pathMatch: 'full' }
+  { path: '*', redirectTo: 'home/listhome', pathMatch: 'full' },
+  {path: 'login', component: LoginComponent, canActivate: [NoauthGuard]},
 ];
 
 @NgModule({

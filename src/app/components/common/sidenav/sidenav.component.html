@@ -1,6 +1,8 @@
 <mat-nav-list>
   <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
-  <app-menu-list-item *ngFor="let adminitem of adminNavItems" [item]="adminitem"></app-menu-list-item>
+  <div *ngIf="authenticated">
+    <app-menu-list-item *ngFor="let adminitem of adminNavItems" [item]="adminitem"></app-menu-list-item>
+  </div>
 </mat-nav-list>
 
 <!--

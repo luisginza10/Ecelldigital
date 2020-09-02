@@ -44,6 +44,7 @@ import { ListEmpleadoComponent } from './components/adminzone/entidades/empleado
 import { VerFotoEmpleComponent } from './components/adminzone/entidades/empleados/ver-foto-emple/ver-foto-emple.component';
 import { ContactoComponent } from './components/homes/contacto/contacto.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { AuthService } from './services/auth.service';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -100,7 +101,8 @@ const skltnConfig: SkltnConfig = {
     MarcaService,
     CategoriaService,
     ProductoService,
-    SubcategoriaService
+    SubcategoriaService,
+    AuthService
   ],
   entryComponents:
   [

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NavItem } from 'src/app/models/nav-item';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ChildParentService } from 'src/app/services/child-parent.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,6 +12,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
+  authenticated: boolean;
   @Output()
   sidenav = new EventEmitter();
   /*
@@ -400,9 +403,25 @@ export class SidenavComponent implements OnInit {
   }
 ];
   toggelSidenav(even: any) {
+    console.log(even);
     this.sidenav.emit('toggel');
   }
-  constructor(private cateServ: CategoriaService) { }
+  constructor(
+    private cateServ: CategoriaService,
+    private authServ: AuthService,
+    private _sharedService: ChildParentService) {
+      this.authenticated = this.authServ.isAuthenticated();
+      /*Child-to-parent */
+      _sharedService.changeEmitted$.subscribe(
+        text => {
+            const value = text as string;
+            if (value === 'login') {
+              this.authenticated = true;
+            } else {
+              this.authenticated = false;
+            }
+      });
+    }
 
   ngOnInit(): void {
     this.cateServ.getCategorias().subscribe(res => {

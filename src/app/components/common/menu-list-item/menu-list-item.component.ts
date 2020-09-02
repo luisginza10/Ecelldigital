@@ -3,6 +3,7 @@ import {NavItem} from '../../../models/nav-item';
 import {Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Categoria } from 'src/app/models/categoria';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu-list-item',
@@ -24,7 +25,7 @@ export class MenuListItemComponent implements OnInit {
   @Input() item: Categoria;
   @Input() depth: number;
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private authserv: AuthService) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -36,7 +37,7 @@ export class MenuListItemComponent implements OnInit {
     if (!item.subcatelist || !item.subcatelist.length) {
       if (item.admin) {
         if (item.route === 'exit') {
-            console.log(item.route);
+            this.cerrarSesion();
         } else {
           this.router.navigate([`/adminzone/${item.route}`]);
         }
@@ -52,5 +53,7 @@ export class MenuListItemComponent implements OnInit {
     }
 
   }
-
+  cerrarSesion() {
+    this.authserv.logout();
+  }
 }
