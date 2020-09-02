@@ -24,6 +24,13 @@ export class NotificationService {
       text: msg
     });
   }
+  info(msg: string) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Atención.!',
+      text: msg
+    });
+  }
   error(msg: string) {
     Swal.fire({
       icon: 'error',
