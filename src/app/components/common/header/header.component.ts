@@ -2,6 +2,8 @@ import { Component, OnInit, Output, QueryList, ViewChildren } from '@angular/cor
 import { EventEmitter } from '@angular/core';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { LoadingService } from 'src/app/shared/loading.service';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { ContactoComponent } from '../../homes/contacto/contacto.component';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class HeaderComponent implements OnInit {
   toggelSidenav(event: any) {
     this.sidenav.emit('toggel');
   }
-  constructor(public loadingService: LoadingService) { }
+  constructor(
+    public loadingService: LoadingService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     /*
@@ -31,5 +35,12 @@ export class HeaderComponent implements OnInit {
   }
   enableSidenav() {
     this.sidenavEnable = !this.sidenavEnable;
+  }
+  mostrarDialog() {
+    const dialogConf = new MatDialogConfig();
+    dialogConf.disableClose = true;
+    dialogConf.autoFocus = true;
+    dialogConf.height = '460px';
+    const dialogref = this.dialog.open(ContactoComponent, dialogConf);
   }
 }

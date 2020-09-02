@@ -1,6 +1,6 @@
 <div style="display: inline-flex; align-items: center; margin: 10px;">
   <div style="margin-top: 10px;">
-    <h2>Lista de Productos</h2>
+    <h2>Lista de Vendedores</h2>
   </div>&nbsp;&nbsp;
   <div>
     <button mat-icon-button color="primary" (click)="nuevo()">
@@ -12,12 +12,6 @@
 <div style="margin: 10px;">
   <mat-form-field class="filter">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>&nbsp;
-  <mat-form-field style="width: 150px;">
-    <mat-select [value]="'todos'" placeholder="subcategorias" (selectionChange)="seleccion($event)">
-      <mat-option value="todos">TODOS</mat-option>
-      <mat-option *ngFor="let cat of subcategorias" [value]="cat.descripcion"> {{ cat.descripcion }}</mat-option>
-    </mat-select>
   </mat-form-field>
 </div>
 <div class="example-container mat-elevation-z8">
@@ -37,12 +31,39 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Column -->
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span class="mobile-label">Nombre:</span>
-        {{element.nombre}}
+        {{element.nombrerazon}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="ciruc">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> CI </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">CI:</span>
+        {{element.ciruc}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="celular">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Celular </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Celular:</span>
+        {{element.celular}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="direccion">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Direccion:</span>
+        {{element.direccion}}
       </mat-cell>
     </ng-container>
 
@@ -66,3 +87,4 @@
   </mat-table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+

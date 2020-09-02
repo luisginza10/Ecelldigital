@@ -40,6 +40,10 @@ import { InfoproductComponent } from './components/homes/infoproduct/infoproduct
 import { EmpleadoComponent } from './components/adminzone/entidades/empleados/empleado/empleado.component';
 import { ProbycatpadreComponent } from './components/homes/probycatpadre/probycatpadre.component';
 import { ProbydescComponent } from './components/homes/probydesc/probydesc.component';
+import { ListEmpleadoComponent } from './components/adminzone/entidades/empleados/list-empleado/list-empleado.component';
+import { VerFotoEmpleComponent } from './components/adminzone/entidades/empleados/ver-foto-emple/ver-foto-emple.component';
+import { ContactoComponent } from './components/homes/contacto/contacto.component';
+import { LoginComponent } from './components/auth/login/login.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -73,7 +77,11 @@ const skltnConfig: SkltnConfig = {
     InfoproductComponent,
     EmpleadoComponent,
     ProbycatpadreComponent,
-    ProbydescComponent
+    ProbydescComponent,
+    ListEmpleadoComponent,
+    VerFotoEmpleComponent,
+    ContactoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -100,8 +108,11 @@ const skltnConfig: SkltnConfig = {
     CategoriaComponent,
     ProductoComponent,
     VerFotoComponent,
+    VerFotoEmpleComponent,
     SubcategoriaComponent,
-    InfoproductComponent
+    InfoproductComponent,
+    EmpleadoComponent,
+    ContactoComponent
   ],
   bootstrap: [AppComponent]
 })

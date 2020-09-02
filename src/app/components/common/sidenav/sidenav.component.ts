@@ -386,6 +386,12 @@ export class SidenavComponent implements OnInit {
       },
       {
         admin: true,
+        route: 'listempleados',
+        descripcion: 'Vendedores',
+        icono: null
+      },
+      {
+        admin: true,
         route: 'exit',
         descripcion: 'Cerrar Sesión',
         icono: null

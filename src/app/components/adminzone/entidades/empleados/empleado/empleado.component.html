@@ -1,1 +1,43 @@
-<p>empleado works!</p>
+<mat-toolbar>
+  <span>{{service.form.controls['id'].value?"Modificar":"Crear nuevo"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="cerrar()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" (submit)="guardar(service.form.value)">
+
+    <mat-form-field class="invisible  example-full-width">
+      <input matInput placeholder="Código" formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Nombre" formControlName="nombrerazon" style="text-transform: uppercase;">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="number" matInput placeholder="CI" formControlName="ciruc">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Celular" formControlName="celular">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Telefono" formControlName="telefono">
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Dirección" formControlName="direccion">
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Correo E." formControlName="email">
+    </mat-form-field>
+
+  <div class="mat-dialog-actions button-row">
+    <button type="submit" mat-raised-button color="primary" [disabled]="service.form.invalid">Guardar</button>
+    <button type="button" mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>
+  </div>
+</form>

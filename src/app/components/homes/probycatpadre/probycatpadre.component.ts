@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-probycatpadre',

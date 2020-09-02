@@ -1,0 +1,33 @@
+.example-card {
+  max-width: 400px;
+  overflow: hidden;
+}
+.new-image-container{
+  display: flex;
+  flex-direction: column;
+  .container-input-file{
+    margin-bottom: 5px;
+    .custom-file{
+      border: 1px solid #3c034b;
+      display: inline-block;
+      padding: 6px 0;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      input[type="file"] {
+        display: none;
+      }
+    }
+  }
+  button{
+    width: 100%;
+  }
+  mat-card img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover; /*this makes the image in src fit to the size specified below*/
+    width: 230px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 200px;
+  }
+}

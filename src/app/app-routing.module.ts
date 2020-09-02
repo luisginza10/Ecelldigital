@@ -11,6 +11,7 @@ import { ProbycatComponent } from './components/homes/probycat/probycat.componen
 import { PrincipalComponent } from './components/homes/principal/principal.component';
 import { ProbycatpadreComponent } from './components/homes/probycatpadre/probycatpadre.component';
 import { ProbydescComponent } from './components/homes/probydesc/probydesc.component';
+import { ListEmpleadoComponent } from './components/adminzone/entidades/empleados/list-empleado/list-empleado.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
       {path: 'listcategorias', component: ListCategoriaComponent},
       {path: 'listsubcategorias', component: ListSubcategoriaComponent},
       {path: 'listmarcas', component: ListMarcaComponent},
-      {path: 'listproductos', component: ListProductoComponent}
+      {path: 'listproductos', component: ListProductoComponent},
+      {path: 'listempleados', component: ListEmpleadoComponent}
     ]
   },
   { path: '', redirectTo: 'home/listhome', pathMatch: 'full' },
