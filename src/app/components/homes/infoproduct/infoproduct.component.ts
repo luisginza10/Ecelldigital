@@ -11,6 +11,7 @@ import { Producto } from 'src/app/models/producto';
 export class InfoproductComponent implements OnInit {
   baseurl = '';
   producto: Producto;
+  cotizacion: number;
   constructor(
     public base: BaseurlService,
     public dialogRef: MatDialogRef<InfoproductComponent>,
@@ -19,8 +20,25 @@ export class InfoproductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.producto = this.data.producto;
+    this.cotizacion = this.data.cotiza;
   }
   public cerrar(): void {
     this.dialogRef.close();
+  }
+  currencyFormatDE(num: any) {
+    return (
+      num
+        .toFixed(2) // always two decimal digits
+        .replace('.', ',') // replace decimal point character with ,
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    );
+  }
+  currencyFormatGs(num: any) {
+    return (
+      num
+        .toFixed() // always two decimal digits
+        .replace('.', ',') // replace decimal point character with ,
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    );
   }
 }

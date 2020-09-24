@@ -17,9 +17,6 @@ export class CotizacionService {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     montous: new FormControl(0, Validators.required),
-    montors: new FormControl(0, Validators.required),
-    montops: new FormControl(0, Validators.required),
-    montoeu: new FormControl(0, Validators.required),
     createAt: new FormControl(null),
     estado: new FormControl(null)
   });
@@ -35,7 +32,13 @@ export class CotizacionService {
     return this.http.get<Cotizacion[]>(this.url);
   }
   populateForm(form: Cotizacion) {
-    this.form.setValue(form);
+    const coti: Cotizacion = {};
+    coti.id = form.id;
+    coti.montous = form.montous;
+    coti.createAt = form.createAt;
+    coti.estado = form.estado;
+    //console.log(coti);
+    this.form.setValue(coti);
   }
   create(bean: Cotizacion): Observable<Cotizacion> {
     return this.http.post<Cotizacion>(this.url, bean).pipe(

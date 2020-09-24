@@ -14,7 +14,8 @@
         src="{{baseurl}}api/uploads/img/{{producto.img}}">
     </figure>
     <section>
-      <h2 style="font-weight: bold; color: orangered;">Precio: {{producto.preciomin}} U$.</h2>
+      <h2 style="font-weight: bold; color: orangered;">Precio: {{currencyFormatGs((producto.preciomin * cotizacion))}} G$.</h2>
+      <h4 style="font-weight: bold; color: #000000;">Precio: {{currencyFormatDE(producto.preciomin)}} U$.</h4>
       <details>
         <summary>Especificaciones técnicas</summary>
         {{producto?.descripcion}}

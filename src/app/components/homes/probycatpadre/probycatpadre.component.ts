@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Cotizacion } from 'src/app/models/cotizacion';
+import { CotizacionService } from 'src/app/services/cotizacion.service';
 
 @Component({
   selector: 'app-probycatpadre',
@@ -13,6 +15,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./probycatpadre.component.scss']
 })
 export class ProbycatpadreComponent implements OnInit {
+  cotizacion: Cotizacion;
   @ViewChild('busqueda', {static: true}) busqueda: any;
   form = new FormGroup({
     busqueda: new FormControl(''),
@@ -27,11 +30,13 @@ export class ProbycatpadreComponent implements OnInit {
     private productoService: ProductoService,
     public base: BaseurlService,
     private activateRouter: ActivatedRoute,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private cotizaServ: CotizacionService) {
       this.baseurl = this.base.getBaseUrl();
     }
 
   ngOnInit(): void {
+    this.getCotiza();
     this.productlength = 10;
     this.activateRouter.params.subscribe(params => {
       this.idcat = params.id;
@@ -39,6 +44,11 @@ export class ProbycatpadreComponent implements OnInit {
         //console.log(this.filterdesc);
         this.listar(this.idcat);
       }
+    });
+  }
+  getCotiza() {
+    this.cotizaServ.getUltimaCoti().subscribe(res => {
+      this.cotizacion =  res as Cotizacion;
     });
   }
   listar(id: number) {
@@ -102,13 +112,21 @@ actualizaFiltro() {
     const dialogConf = new MatDialogConfig();
     dialogConf.maxWidth = '90vw';
     dialogConf.width = '350px';
-    dialogConf.data = {producto: pro};
+    dialogConf.data = {producto: pro, cotiza: this.cotizacion.montous};
     const dialogref = this.dialog.open(InfoproductComponent, dialogConf);
   }
   currencyFormatDE(num: any) {
       return (
         num
           .toFixed(2) // always two decimal digits
+          .replace('.', ',') // replace decimal point character with ,
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+      );
+    }
+    currencyFormatGs(num: any) {
+      return (
+        num
+          .toFixed() // always two decimal digits
           .replace('.', ',') // replace decimal point character with ,
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
       );

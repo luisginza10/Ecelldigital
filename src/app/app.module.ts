@@ -47,6 +47,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthService } from './services/auth.service';
 import { CotizacionComponent } from './components/adminzone/administrativo/cotizaciones/cotizacion/cotizacion.component';
 import { ListCotizacionComponent } from './components/adminzone/administrativo/cotizaciones/list-cotizacion/list-cotizacion.component';
+import { CotizacionService } from './services/cotizacion.service';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -106,7 +107,8 @@ const skltnConfig: SkltnConfig = {
     CategoriaService,
     ProductoService,
     SubcategoriaService,
-    AuthService
+    AuthService,
+    CotizacionService
   ],
   entryComponents:
   [
@@ -118,7 +120,8 @@ const skltnConfig: SkltnConfig = {
     SubcategoriaComponent,
     InfoproductComponent,
     EmpleadoComponent,
-    ContactoComponent
+    ContactoComponent,
+    CotizacionComponent
   ],
   bootstrap: [AppComponent]
 })

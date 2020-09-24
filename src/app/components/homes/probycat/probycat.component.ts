@@ -8,6 +8,8 @@ import { MarcaService } from 'src/app/services/marca.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoproductComponent } from '../infoproduct/infoproduct.component';
+import { Cotizacion } from 'src/app/models/cotizacion';
+import { CotizacionService } from 'src/app/services/cotizacion.service';
 
 @Component({
   selector: 'app-probycat',
@@ -15,6 +17,7 @@ import { InfoproductComponent } from '../infoproduct/infoproduct.component';
   styleUrls: ['./probycat.component.scss']
 })
 export class ProbycatComponent implements OnInit {
+  cotizacion: Cotizacion;
   baseurl = '';
   catefilter = 'todos';
   marcas: Marcabycat[] = [];
@@ -27,11 +30,13 @@ export class ProbycatComponent implements OnInit {
     public base: BaseurlService,
     private marcaserv: MarcaService,
     private activateRouter: ActivatedRoute,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private cotizaServ: CotizacionService) {
       this.baseurl = this.base.getBaseUrl();
     }
 
   ngOnInit(): void {
+    this.getCotiza();
     this.productlength = 10;
     this.activateRouter.params.subscribe(params => {
       this.idcat = params.id;
@@ -40,7 +45,11 @@ export class ProbycatComponent implements OnInit {
         this.listar(this.idcat);
       }
     });
-
+  }
+  getCotiza() {
+    this.cotizaServ.getUltimaCoti().subscribe(res => {
+      this.cotizacion =  res as Cotizacion;
+    });
   }
   listar(idsubcat: number) {
     this.productoService.findByCat(idsubcat).subscribe(res => {
@@ -108,13 +117,21 @@ export class ProbycatComponent implements OnInit {
     const dialogConf = new MatDialogConfig();
     dialogConf.maxWidth = '90vw';
     dialogConf.width = '350px';
-    dialogConf.data = {producto: pro};
+    dialogConf.data = {producto: pro, cotiza: this.cotizacion.montous};
     const dialogref = this.dialog.open(InfoproductComponent, dialogConf);
   }
-  currencyFormatDE(num: any) {
+    currencyFormatDE(num: any) {
       return (
         num
           .toFixed(2) // always two decimal digits
+          .replace('.', ',') // replace decimal point character with ,
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+      );
+    }
+    currencyFormatGs(num: any) {
+      return (
+        num
+          .toFixed() // always two decimal digits
           .replace('.', ',') // replace decimal point character with ,
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
       );

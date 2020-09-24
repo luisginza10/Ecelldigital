@@ -15,6 +15,7 @@ import { ListEmpleadoComponent } from './components/adminzone/entidades/empleado
 import { AuthGuard } from './components/auth/guards/auth.guard';
 import { LoginComponent } from './components/auth/login/login.component';
 import { NoauthGuard } from './components/auth/guards/noauth.guard';
+import { ListCotizacionComponent } from './components/adminzone/administrativo/cotizaciones/list-cotizacion/list-cotizacion.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
       {path: 'listsubcategorias', component: ListSubcategoriaComponent},
       {path: 'listmarcas', component: ListMarcaComponent},
       {path: 'listproductos', component: ListProductoComponent},
-      {path: 'listempleados', component: ListEmpleadoComponent}
+      {path: 'listempleados', component: ListEmpleadoComponent},
+      {path: 'listcotizaciones', component: ListCotizacionComponent}
     ]
   },
   { path: '', redirectTo: 'home/listhome', pathMatch: 'full' },

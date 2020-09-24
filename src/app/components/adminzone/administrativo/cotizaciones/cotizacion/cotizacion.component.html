@@ -1,1 +1,38 @@
-<p>cotizacion works!</p>
+<mat-toolbar>
+  <span>{{cotiservice.form.controls['id'].value?"Modificar cotización":"Agregar cotización"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="cerrar()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="cotiservice.form" (submit)="guardar(cotiservice.form.value)">
+  <mat-form-field class="invisible  example-full-width">
+    <input matInput placeholder="Código" formControlName="id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="number" matInput placeholder="Dolares" formControlName="montous">
+    <mat-error>Este campo es requerido.</mat-error>
+  </mat-form-field>
+  <!--
+  <mat-form-field>
+    <input type="number" matInput placeholder="Reales" formControlName="montors">
+    <mat-error>Este campo es requerido.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="number" matInput placeholder="Pesos" formControlName="montops">
+    <mat-error>Este campo es requerido.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="number" matInput placeholder="Euros" formControlName="montoeu">
+    <mat-error>Este campo es requerido.</mat-error>
+  </mat-form-field>
+  -->
+
+  <div class="mat-dialog-actions button-row">
+    <button type="submit" mat-raised-button color="primary" [disabled]="cotiservice.form.invalid">Guardar</button>
+    <button type="button" mat-raised-button color="warn" (click)="limpiar()">Limpiar</button>
+  </div>
+</form>

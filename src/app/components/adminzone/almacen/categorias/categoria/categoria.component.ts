@@ -34,7 +34,6 @@ export class CategoriaComponent implements OnInit {
        const resp: any = res;
        this.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    }

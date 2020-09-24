@@ -20,7 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
   ]
 })
 export class MenuListItemComponent implements OnInit {
-  expanded: boolean;
+  expanded = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: Categoria;
   @Input() depth: number;

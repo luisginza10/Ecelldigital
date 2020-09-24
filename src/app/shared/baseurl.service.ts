@@ -10,6 +10,6 @@ export class BaseurlService {
   */
   constructor() { }
   getBaseUrl(): string {
-    return 'http://localhost:8080/';
+    return 'https://aviscelldigital.herokuapp.com/';
   }
 }
