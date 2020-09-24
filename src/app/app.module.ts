@@ -45,6 +45,8 @@ import { VerFotoEmpleComponent } from './components/adminzone/entidades/empleado
 import { ContactoComponent } from './components/homes/contacto/contacto.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthService } from './services/auth.service';
+import { CotizacionComponent } from './components/adminzone/administrativo/cotizaciones/cotizacion/cotizacion.component';
+import { ListCotizacionComponent } from './components/adminzone/administrativo/cotizaciones/list-cotizacion/list-cotizacion.component';
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',
@@ -82,7 +84,9 @@ const skltnConfig: SkltnConfig = {
     ListEmpleadoComponent,
     VerFotoEmpleComponent,
     ContactoComponent,
-    LoginComponent
+    LoginComponent,
+    CotizacionComponent,
+    ListCotizacionComponent
   ],
   imports: [
     BrowserModule,

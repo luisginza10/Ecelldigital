@@ -1,0 +1,59 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {Cotizacion} from 'src/app/models/cotizacion';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {map, catchError} from 'rxjs/operators';
+import { NotificationService } from '../shared/notification.service';
+import { BaseurlService } from '../shared/baseurl.service';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CotizacionService {
+  private url = '';
+
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    montous: new FormControl(0, Validators.required),
+    montors: new FormControl(0, Validators.required),
+    montops: new FormControl(0, Validators.required),
+    montoeu: new FormControl(0, Validators.required),
+    createAt: new FormControl(null),
+    estado: new FormControl(null)
+  });
+
+  constructor(private http: HttpClient, private notiserv: NotificationService, private baseurl: BaseurlService) {
+    this.url = this.baseurl.getBaseUrl() + 'api/cotizaciones';
+  }
+
+  getUltimaCoti(): Observable<Cotizacion> {
+    return this.http.get<Cotizacion>(this.url + '/ultimacoti');
+  }
+  getCotizacion(): Observable<Cotizacion[]> {
+    return this.http.get<Cotizacion[]>(this.url);
+  }
+  populateForm(form: Cotizacion) {
+    this.form.setValue(form);
+  }
+  create(bean: Cotizacion): Observable<Cotizacion> {
+    return this.http.post<Cotizacion>(this.url, bean).pipe(
+      catchError(e => {
+        if (e.status === 400) {
+          this.notiserv.warn(e.error.error);
+          return throwError(e);
+        }
+        this.notiserv.error(e);
+        return throwError(e);
+      })
+      );
+  }
+  update(bean: Cotizacion): Observable<Cotizacion> {
+    return this.http.put<Cotizacion>(this.url, bean).pipe(
+      catchError(e => {
+          return throwError(e);
+      })
+    );
+  }
+}

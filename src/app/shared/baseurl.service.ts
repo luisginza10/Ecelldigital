@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class BaseurlService {
   /*
-    urlserver: return 'http://192.168.0.12:8080/avisbeer/';
+    cloud: https://aviscelldigital.herokuapp.com/
     desarrollo:return 'http://localhost:8080/';
   */
   constructor() { }

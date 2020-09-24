@@ -24,6 +24,7 @@
     "@material-extended/mde": "^2.2.2",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "animate.css": "^4.1.0",
+    "aws-sdk": "^2.749.0",
     "jquery": "^3.5.1",
     "ng-image-slider": "^2.5.0",
     "ngx-owl-carousel": "^2.0.7",
