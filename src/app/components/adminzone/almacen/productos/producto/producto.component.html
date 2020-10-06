@@ -39,6 +39,17 @@
     </mat-form-field>
 
     <mat-form-field>
+      <input type="text" matInput placeholder="Costo" pattern="[0-9.,]*"
+      (keyup)="getCosto($event,'no')" (blur)="getCosto($event,'blur')" formControlName="costo">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Utilidad" formControlName="utilidad">
+      <mat-error>Este campo es requerido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
       <input type="number" matInput placeholder="Precio Min." formControlName="preciomin">
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>

@@ -10,6 +10,7 @@ import { Marca } from 'src/app/models/marca';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { map, flatMap } from 'rxjs/operators';
 import { MarcaService } from 'src/app/services/marca.service';
+import { FdecimalService } from 'src/app/shared/fdecimal.service';
 
 @Component({
   selector: 'app-producto',
@@ -21,13 +22,18 @@ export class ProductoComponent implements OnInit {
   marcas: Marca[];
   filteredsubCate: Observable<Subcategoria[]>;
   filteredMarca: Observable<Marca[]>;
+  inputpreciomin: any; preciomin = 0;
+  inputpreciomay: any; preciomay = 0;
+  inputpreciopromo: any; preciopromo = 0;
+
   constructor(
     public service: ProductoService,
     public subcateservice: SubcategoriaService,
     public marcaservice: MarcaService,
     public dialogRef: MatDialogRef<ProductoComponent>,
     private notification: NotificationService,
-    private loading: LoadingService) { }
+    private loading: LoadingService,
+    public fdecimal: FdecimalService) { }
 
  ngOnInit() {
   this.getCombo();
@@ -88,8 +94,14 @@ export class ProductoComponent implements OnInit {
   this.service.form.reset();
   this.dialogRef.close();
 }
+getCosto(input: any, blur: string) {
+  if (isNaN(this.fdecimal.format(input, blur))) { this.service.costo = 0; return; }
+  this.service.costo = this.fdecimal.format(input, blur);
+  this.service.form.controls['costo'].setValue(this.fdecimal.inputval);
+}
 public limpiar(): void {
   this.service.form.reset();
+  this.service.costo = 0;
   this.service.form.controls['promocionar'].setValue(0);
 }
 getCombo() {

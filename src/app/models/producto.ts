@@ -5,6 +5,8 @@ export class Producto {
   id?: number;
   nombre?: string;
   descripcion?: string;
+  costo?: number;
+  utilidad?: number;
   preciomin?: number;
   preciomay?: number;
   promocionar?: number;

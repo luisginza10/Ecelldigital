@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
-import { FdecimalService } from 'src/app/services/fdecimal.service';
+import { FdecimalService } from 'src/app/shared/fdecimal.service';
+
 
 @Component({
   selector: 'app-confirm',

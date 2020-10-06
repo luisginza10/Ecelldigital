@@ -6,6 +6,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {map, catchError} from 'rxjs/operators';
 import { NotificationService } from '../shared/notification.service';
 import { BaseurlService } from '../shared/baseurl.service';
+import { FdecimalService } from '../shared/fdecimal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,13 @@ export class ProductoService {
   public producto: Producto;
   myControlMarca = new FormControl('', Validators.required);
   myControlsubcategoria = new FormControl('', Validators.required);
+  costo = 0;
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl('', Validators.required),
     descripcion: new FormControl(null),
+    costo: new FormControl('', Validators.required),
+    utilidad: new FormControl(null, Validators.required),
     preciomin: new FormControl(null, Validators.required),
     preciomay: new FormControl(null),
     promocionar: new FormControl(0),
@@ -50,9 +54,18 @@ export class ProductoService {
     this.form.controls['nuevo'].setValue(0);
     this.form.controls['preciomay'].setValue(0);
     this.form.controls['preciopromo'].setValue(0);
+    this.form.controls['costo'].setValue(0);
+    this.form.controls['utilidad'].setValue(0);
   }
   populateForm(form: Producto) {
+    this.costo = form.costo;
     this.form.setValue(form);
+    this.form.controls['costo'].setValue(this.currencyFormatDE(this.costo));
+    /*
+    this.form.setValue(form);
+    this.fdecimal.format(this.costo, 'no');
+    this.form.controls['costo'].setValue(this.fdecimal.inputval);
+    */
   }
   populateForImg(form: Producto) {
     this.producto = new Producto();
@@ -62,6 +75,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${this.url}/filtro/${filtro}`);
   }
   create(bean: Producto): Observable<Producto> {
+    bean.costo = this.costo;
     return this.http.post<Producto>(this.url, bean).pipe(
       catchError(e => {
         if (e.status === 400) {
@@ -74,6 +88,7 @@ export class ProductoService {
       );
   }
   update(bean: Producto): Observable<Producto> {
+    bean.costo = this.costo;
     return this.http.put<Producto>(this.url, bean).pipe(
       catchError(e => {
           return throwError(e);
@@ -88,6 +103,14 @@ export class ProductoService {
       catchError(e => {
         return throwError(e);
       })
+    );
+  }
+  currencyFormatDE(num: any) {
+    return (
+      num
+        .toFixed(2) // always two decimal digits
+        //.replace('.', ',') // replace decimal point character with ,
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     );
   }
 }
