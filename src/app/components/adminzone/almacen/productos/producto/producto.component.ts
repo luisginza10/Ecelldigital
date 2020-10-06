@@ -99,6 +99,39 @@ getCosto(input: any, blur: string) {
   this.service.costo = this.fdecimal.format(input, blur);
   this.service.form.controls['costo'].setValue(this.fdecimal.inputval);
 }
+getUtilidad(input: any) {
+  if ( this.service.costo !== 0) {
+    const utilidad = input.target.value;
+    const costo = this.service.costo;
+    const totporcen = (costo / 100) * utilidad;
+    this.service.preciomin = (costo + totporcen);
+    this.service.form.controls['preciomin'].setValue(this.service.currencyFormatDE(this.service.preciomin));
+  }
+}
+getPreciomin(input: any, blur: string) {
+  if ( this.service.costo !== 0) {
+    if (isNaN(this.fdecimal.format(input, blur))) { this.service.preciomin = 0; return; }
+    this.service.preciomin = this.fdecimal.format(input, blur);
+    this.service.form.controls['preciomin'].setValue(this.fdecimal.inputval);
+    if (blur === 'blur' ) {
+      const costo = this.service.costo;
+      const precio = this.service.preciomin;
+      const totporcen = (precio - costo) * 100;
+      const utilidad = (totporcen / costo).toFixed(2);
+      this.service.form.controls['utilidad'].setValue(utilidad);
+    }
+  }
+}
+getPrecioMay(input: any, blur: string) {
+  if (isNaN(this.fdecimal.format(input, blur))) { this.service.preciomay = 0; return; }
+  this.service.preciomay = this.fdecimal.format(input, blur);
+  this.service.form.controls['preciomay'].setValue(this.fdecimal.inputval);
+}
+getPreciopPro(input: any, blur: string) {
+  if (isNaN(this.fdecimal.format(input, blur))) { this.service.preciopromo = 0; return; }
+  this.service.preciopromo = this.fdecimal.format(input, blur);
+  this.service.form.controls['preciopromo'].setValue(this.fdecimal.inputval);
+}
 public limpiar(): void {
   this.service.form.reset();
   this.service.costo = 0;

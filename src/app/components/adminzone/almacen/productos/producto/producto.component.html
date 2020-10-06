@@ -40,22 +40,26 @@
 
     <mat-form-field>
       <input type="text" matInput placeholder="Costo" pattern="[0-9.,]*"
-      (keyup)="getCosto($event,'no')" (blur)="getCosto($event,'blur')" formControlName="costo">
+      inputmode="decimal" value="" data-type="currency" (keyup)="getCosto($event,'no')" (blur)="getCosto($event,'blur')"
+      formControlName="costo">
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Utilidad" formControlName="utilidad">
+      <input type="text" matInput placeholder="Utilidad %" pattern="[0-9.]*"
+      inputmode="decimal" (blur)="getUtilidad($event)" formControlName="utilidad">
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Precio Min." formControlName="preciomin">
+      <input type="text" matInput placeholder="Precio Min." pattern="[0-9.,]*"
+      (keyup)="getPreciomin($event,'no')" (blur)="getPreciomin($event,'blur')" formControlName="preciomin">
       <mat-error>Este campo es requerido.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Precio May." formControlName="preciomay">
+      <input type="text" matInput placeholder="Precio May." pattern="[0-9.,]*"
+      (keyup)="getPrecioMay($event,'no')" (blur)="getPrecioMay($event,'blur')" formControlName="preciomay">
     </mat-form-field>
 
     <mat-form-field>
@@ -66,7 +70,8 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Precio Promocional." formControlName="preciopromo">
+      <input type="text" matInput placeholder="Precio Promocional." pattern="[0-9.,]*"
+      (keyup)="getPreciopPro($event,'no')" (blur)="getPreciopPro($event,'blur')" formControlName="preciopromo">
     </mat-form-field>
 
     <mat-form-field>

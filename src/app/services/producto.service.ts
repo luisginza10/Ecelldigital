@@ -17,13 +17,16 @@ export class ProductoService {
   myControlMarca = new FormControl('', Validators.required);
   myControlsubcategoria = new FormControl('', Validators.required);
   costo = 0;
+  preciomin = 0;
+  preciomay = 0;
+  preciopromo = 0;
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl('', Validators.required),
     descripcion: new FormControl(null),
     costo: new FormControl('', Validators.required),
     utilidad: new FormControl(null, Validators.required),
-    preciomin: new FormControl(null, Validators.required),
+    preciomin: new FormControl('', Validators.required),
     preciomay: new FormControl(null),
     promocionar: new FormControl(0),
     preciopromo: new FormControl(null),
@@ -59,13 +62,12 @@ export class ProductoService {
   }
   populateForm(form: Producto) {
     this.costo = form.costo;
+    this.preciomin = form.preciomin;
+    this.preciomay = form.preciomay;
+    this.preciopromo = form.preciopromo;
     this.form.setValue(form);
     this.form.controls['costo'].setValue(this.currencyFormatDE(this.costo));
-    /*
-    this.form.setValue(form);
-    this.fdecimal.format(this.costo, 'no');
-    this.form.controls['costo'].setValue(this.fdecimal.inputval);
-    */
+    this.form.controls['preciomin'].setValue(this.currencyFormatDE(this.preciomin));
   }
   populateForImg(form: Producto) {
     this.producto = new Producto();
@@ -76,6 +78,9 @@ export class ProductoService {
   }
   create(bean: Producto): Observable<Producto> {
     bean.costo = this.costo;
+    bean.preciomin = this.preciomin;
+    bean.preciomay = this.preciomay;
+    bean.preciopromo = this.preciopromo;
     return this.http.post<Producto>(this.url, bean).pipe(
       catchError(e => {
         if (e.status === 400) {
@@ -89,6 +94,9 @@ export class ProductoService {
   }
   update(bean: Producto): Observable<Producto> {
     bean.costo = this.costo;
+    bean.preciomin = this.preciomin;
+    bean.preciomay = this.preciomay;
+    bean.preciopromo = this.preciopromo;
     return this.http.put<Producto>(this.url, bean).pipe(
       catchError(e => {
           return throwError(e);
