@@ -15,8 +15,17 @@
     </mat-form-field>
 
     <mat-form-field style="width: 230px;">
-      <textarea matInput placeholder="Descripcion" formControlName="descripcion"></textarea>
+      <textarea matInput placeholder="Especificación técnica" formControlName="descripcion"></textarea>
     </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Referencia" formControlName="referencia">
+    </mat-form-field>
+
+    <mat-form-field style="width: 230px;">
+      <input type="text" matInput placeholder="Cod.Barras" formControlName="codbarras">
+    </mat-form-field>
+
     <!--Autocomplete-->
     <mat-form-field>
       <input type="text" placeholder="Buscar marca" matInput [formControl]="service.myControlMarca" [matAutocomplete]="automarca" formControlName="marca">

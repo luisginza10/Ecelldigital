@@ -10,8 +10,8 @@
       <!--<h4>Lo mejor solo en Celldigital</h4>-->
     </header>
     <figure>
-      <img
-        src="{{baseurl}}api/uploads/img/{{producto.img}}">
+      <img *ngIf="producto?.img" src="{{baseurl}}api/uploads/img/{{producto.img}}">
+      <img *ngIf="!producto?.img" src="assets/images/noimage.jpg">
     </figure>
     <section>
       <h2 style="font-weight: bold; color: orangered;">Precio: {{currencyFormatGs((producto.preciomin * cotizacion))}} G$.</h2>

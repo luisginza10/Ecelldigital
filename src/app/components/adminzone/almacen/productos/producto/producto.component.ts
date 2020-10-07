@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { NotificationService } from 'src/app/shared/notification.service';
-import { LoadingService } from 'src/app/shared/loading.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Subcategoria } from 'src/app/models/subcategoria';
@@ -32,7 +31,6 @@ export class ProductoComponent implements OnInit {
     public marcaservice: MarcaService,
     public dialogRef: MatDialogRef<ProductoComponent>,
     private notification: NotificationService,
-    private loading: LoadingService,
     public fdecimal: FdecimalService) { }
 
  ngOnInit() {
@@ -70,22 +68,27 @@ export class ProductoComponent implements OnInit {
     return marca ? marca.descripcion : undefined;
   }
  public guardar(form: Producto): void {
+   this.service.loadingServ.openDialog();
    form.nombre = form.nombre.toLocaleUpperCase();
-   this.loading.openDialog();
+   if ( form.referencia ) {
+      form.referencia = form.referencia.trim();
+   }
+   if ( form.codbarras ) {
+      form.codbarras = form.codbarras.trim();
+   }
    if (!this.service.form.get('id').value) {
      form.estado = true;
      this.service.create(form).subscribe(res => {
        const resp: any = res;
+       this.service.loadingServ.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    } else {
      this.service.update(form).subscribe(res => {
        const resp: any = res;
-       this.loading.close();
+       this.service.loadingServ.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    }

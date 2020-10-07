@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     autoHeightClass: 'owl-height',
   };
   productos: Producto[] = [];
+  probusqueda: Producto[] = [];
   subcategorias: Subcategoria[] = [];
   baseurl = '';
   constructor(
@@ -65,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
   nuevoFiltrobus(event: string) {
     this.productosFilter = [];
-    for (const value of this.productos) {
+    for (const value of this.probusqueda) {
       if (this.productosFilter.length === 20) {
             break;
       }
@@ -90,7 +91,12 @@ export class HomeComponent implements OnInit {
   }
   getProductos(): void {
     this.proServ.findAllDesc('todos').subscribe(res => {
-      this.productos = res;
+      this.probusqueda = res as Producto[];
+      for (const value of this.probusqueda) {
+        if (value.img) {
+          this.productos.push(value);
+        }
+      }
     });
   }
   getsubcategorias(): void {

@@ -38,6 +38,15 @@
     </ng-container>
 
     <!-- Name Column -->
+    <ng-container matColumnDef="referencia">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Referencia </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Referencia:</span>
+        {{element.referencia}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let element">

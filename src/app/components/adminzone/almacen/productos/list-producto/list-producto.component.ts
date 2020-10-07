@@ -22,7 +22,7 @@ export class ListProductoComponent implements OnInit {
   isMobile = true;
   subcategorias: Subcategoria[];
   productos: Producto[] = [];
-  displayedColumns: string[] = ['id', 'nombre', 'actions'];
+  displayedColumns: string[] = ['id', 'referencia', 'nombre', 'actions'];
   dataSource = null;
   catefilter = 'todos';
 

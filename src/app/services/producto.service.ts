@@ -7,6 +7,7 @@ import {map, catchError} from 'rxjs/operators';
 import { NotificationService } from '../shared/notification.service';
 import { BaseurlService } from '../shared/baseurl.service';
 import { FdecimalService } from '../shared/fdecimal.service';
+import { LoadingService } from '../shared/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,8 @@ export class ProductoService {
     id: new FormControl(null),
     nombre: new FormControl('', Validators.required),
     descripcion: new FormControl(null),
+    referencia: new FormControl(null),
+    codbarras: new FormControl(null),
     costo: new FormControl('', Validators.required),
     utilidad: new FormControl(null, Validators.required),
     preciomin: new FormControl('', Validators.required),
@@ -40,7 +43,8 @@ export class ProductoService {
   constructor(
     private http: HttpClient,
     private notiserv: NotificationService,
-    private baseurl: BaseurlService) {
+    private baseurl: BaseurlService,
+    public loadingServ: LoadingService) {
     this.url = this.baseurl.getBaseUrl() + 'api/productos';
   }
   findAllDesc(filtro: string): Observable<Producto[]> {
@@ -55,6 +59,7 @@ export class ProductoService {
   datosIniciales() {
     this.form.controls['promocionar'].setValue(0);
     this.form.controls['nuevo'].setValue(0);
+    this.form.controls['preciomin'].setValue(0);
     this.form.controls['preciomay'].setValue(0);
     this.form.controls['preciopromo'].setValue(0);
     this.form.controls['costo'].setValue(0);
@@ -84,9 +89,11 @@ export class ProductoService {
     return this.http.post<Producto>(this.url, bean).pipe(
       catchError(e => {
         if (e.status === 400) {
+          this.loadingServ.close();
           this.notiserv.warn(e.error.error);
           return throwError(e);
         }
+        this.loadingServ.close();
         this.notiserv.error(e);
         return throwError(e);
       })
@@ -99,6 +106,7 @@ export class ProductoService {
     bean.preciopromo = this.preciopromo;
     return this.http.put<Producto>(this.url, bean).pipe(
       catchError(e => {
+          this.loadingServ.close();
           return throwError(e);
       })
     );
