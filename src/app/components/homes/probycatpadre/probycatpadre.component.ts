@@ -23,6 +23,7 @@ export class ProbycatpadreComponent implements OnInit {
   baseurl = '';
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
+  default = new Array(4);
   filter = '';
   idcat: number;
   productlength = 10;

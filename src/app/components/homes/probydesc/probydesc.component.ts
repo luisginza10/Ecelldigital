@@ -15,6 +15,7 @@ export class ProbydescComponent implements OnInit {
   baseurl = '';
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
+  default = new Array(4);
   filterdesc: string;
   productlength = 10;
   constructor(

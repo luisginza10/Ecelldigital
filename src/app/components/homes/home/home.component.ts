@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     busqueda: new FormControl(''),
   });
   productosFilter: Producto[] = [];
+  default = new Array(4);
   carouselOptions = {
     items: 1,
     dots: false,

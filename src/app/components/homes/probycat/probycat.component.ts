@@ -23,6 +23,7 @@ export class ProbycatComponent implements OnInit {
   marcas: Marcabycat[] = [];
   productos: Producto[] = [];
   productosFilter: Producto[] = [];
+  default = new Array(4);
   idcat: number;
   productlength = 10;
   constructor(
