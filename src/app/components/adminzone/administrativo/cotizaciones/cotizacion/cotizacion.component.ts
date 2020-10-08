@@ -21,26 +21,25 @@ export class CotizacionComponent implements OnInit {
     public cotiservice: CotizacionService,
     public dialogRef: MatDialogRef<CotizacionComponent>,
     private notification: NotificationService,
-    private confirmDialog: ConfirmdialogService,
-    private loading: LoadingService) { }
+    private confirmDialog: ConfirmdialogService) { }
 
   ngOnInit() {
   }
   public guardar(form: Cotizacion): void {
-    this.loading.openDialog();
+    this.cotiservice.loading.openDialog();
     if (!this.cotiservice.form.get('id').value) {
       form.estado = true;
       this.cotiservice.create(form).subscribe(res => {
         const resp: any = res;
+        this.cotiservice.loading.close();
         this.notification.success(resp.mensaje);
-        this.loading.close();
         this.cerrar();
       });
     } else {
       this.cotiservice.update(form).subscribe(res => {
         const resp: any = res;
+        this.cotiservice.loading.close();
         this.notification.success(resp.mensaje);
-        this.loading.close();
         this.cerrar();
       });
     }

@@ -18,7 +18,6 @@ export class SubcategoriaComponent implements OnInit {
     public catservice: SubcategoriaService,
     public dialogRef: MatDialogRef<SubcategoriaComponent>,
     private notification: NotificationService,
-    private loading: LoadingService,
     private cateserv: CategoriaService) { }
 
  ngOnInit() {
@@ -31,21 +30,20 @@ export class SubcategoriaComponent implements OnInit {
  }
  public guardar(form: Subcategoria): void {
    //form.descripcion = form.descripcion.toLocaleUpperCase();
-   this.loading.openDialog();
+   this.catservice.loading.openDialog();
    if (!this.catservice.form.get('id').value) {
      form.estado = true;
      this.catservice.create(form).subscribe(res => {
        const resp: any = res;
+       this.catservice.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    } else {
      this.catservice.update(form).subscribe(res => {
        const resp: any = res;
-       this.loading.close();
+       this.catservice.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    }

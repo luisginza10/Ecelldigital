@@ -14,25 +14,24 @@ export class CategoriaComponent implements OnInit {
   constructor(
     public catservice: CategoriaService,
     public dialogRef: MatDialogRef<CategoriaComponent>,
-    private notification: NotificationService,
-    private loading: LoadingService) { }
+    private notification: NotificationService) { }
 
  ngOnInit() {
  }
  public guardar(form: Categoria): void {
-   this.loading.openDialog();
+   this.catservice.loading.openDialog();
    if (!this.catservice.form.get('id').value) {
      form.estado = true;
      this.catservice.create(form).subscribe(res => {
        const resp: any = res;
+       this.catservice.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    } else {
      this.catservice.update(form).subscribe(res => {
        const resp: any = res;
-       this.loading.close();
+       this.catservice.loading.close();
        this.notification.success(resp.mensaje);
        this.cerrar();
      });

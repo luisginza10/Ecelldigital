@@ -15,28 +15,26 @@ export class MarcaComponent implements OnInit {
   constructor(
     public service: MarcaService,
     public dialogRef: MatDialogRef<MarcaComponent>,
-    private notification: NotificationService,
-    private loading: LoadingService) { }
+    private notification: NotificationService) { }
 
  ngOnInit() {
  }
  public guardar(form: Marca): void {
-   //form.descripcion = form.descripcion.toLocaleUpperCase();
-   this.loading.openDialog();
+   form.descripcion = form.descripcion.toLocaleUpperCase();
+   this.service.loading.openDialog();
    if (!this.service.form.get('id').value) {
      form.estado = true;
      this.service.create(form).subscribe(res => {
        const resp: any = res;
+       this.service.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    } else {
      this.service.update(form).subscribe(res => {
        const resp: any = res;
-       this.loading.close();
+       this.service.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    }

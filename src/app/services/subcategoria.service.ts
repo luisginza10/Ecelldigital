@@ -6,6 +6,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {map, catchError} from 'rxjs/operators';
 import { NotificationService } from '../shared/notification.service';
 import { BaseurlService } from '../shared/baseurl.service';
+import { LoadingService } from '../shared/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class SubcategoriaService {
   constructor(
     private http: HttpClient,
     private notiserv: NotificationService,
-    private baseurl: BaseurlService) {
+    private baseurl: BaseurlService,
+    public loading: LoadingService) {
     this.url = this.baseurl.getBaseUrl() + 'api/subcategorias';
   }
   getsubcategorias(): Observable<Subcategoria[]> {
@@ -40,9 +42,11 @@ export class SubcategoriaService {
     return this.http.post<Subcategoria>(this.url, bean).pipe(
       catchError(e => {
         if (e.status === 400) {
+          this.loading.close();
           this.notiserv.warn(e.error.error);
           return throwError(e);
         }
+        this.loading.close();
         this.notiserv.error(e);
         return throwError(e);
       })
@@ -51,6 +55,7 @@ export class SubcategoriaService {
   update(bean: Subcategoria): Observable<Subcategoria> {
     return this.http.put<Subcategoria>(this.url, bean).pipe(
       catchError(e => {
+          this.loading.close();
           return throwError(e);
       })
     );

@@ -7,6 +7,7 @@ import { NotificationService } from '../shared/notification.service';
 import { Marca } from '../models/marca';
 import { BaseurlService } from '../shared/baseurl.service';
 import { Marcabycat } from '../models/marcabycat';
+import { LoadingService } from '../shared/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class MarcaService {
   constructor(
     private http: HttpClient,
     private notiserv: NotificationService,
-    private baseurl: BaseurlService) {
+    private baseurl: BaseurlService,
+    public loading: LoadingService) {
     this.url = this.baseurl.getBaseUrl() + 'api/marcas';
   }
   listar(): Observable<Marca[]> {
@@ -44,8 +46,10 @@ export class MarcaService {
       catchError(e => {
         if (e.status === 400) {
           this.notiserv.warn(e.error.error);
+          this.loading.close();
           return throwError(e);
         }
+        this.loading.close();
         this.notiserv.error(e);
         return throwError(e);
       })
@@ -54,6 +58,7 @@ export class MarcaService {
   update(bean: Marca): Observable<Marca> {
     return this.http.put<Marca>(this.url, bean).pipe(
       catchError(e => {
+          this.loading.close();
           return throwError(e);
       })
     );

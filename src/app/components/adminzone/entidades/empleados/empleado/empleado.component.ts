@@ -18,8 +18,7 @@ export class EmpleadoComponent implements OnInit {
   constructor(
     public service: EmpleadoService,
     public dialogRef: MatDialogRef<EmpleadoComponent>,
-    private notification: NotificationService,
-    private loading: LoadingService) { }
+    private notification: NotificationService) { }
 
  ngOnInit() {
  }
@@ -28,21 +27,20 @@ export class EmpleadoComponent implements OnInit {
    /*vendedor-a*/
    const cargo: Cargo = {id: 3};
    form.cargo = cargo;
-   this.loading.openDialog();
+   this.service.loading.openDialog();
    if (!this.service.form.get('id').value) {
      form.estado = true;
      this.service.create(form).subscribe(res => {
        const resp: any = res;
+       this.service.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    } else {
      this.service.update(form).subscribe(res => {
        const resp: any = res;
-       this.loading.close();
+       this.service.loading.close();
        this.notification.success(resp.mensaje);
-       this.loading.close();
        this.cerrar();
      });
    }
