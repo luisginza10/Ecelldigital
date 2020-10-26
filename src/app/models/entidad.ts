@@ -7,6 +7,6 @@ export class Entidad {
   telefono?: string;
   celular?: string;
   estado?: boolean;
-  createAt?: Date;
+  createat?: Date;
   img?: string;
 }

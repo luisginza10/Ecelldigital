@@ -49,6 +49,7 @@ import { CotizacionComponent } from './components/adminzone/administrativo/cotiz
 import { ListCotizacionComponent } from './components/adminzone/administrativo/cotizaciones/list-cotizacion/list-cotizacion.component';
 import { CotizacionService } from './services/cotizacion.service';
 import { FdecimalService } from './shared/fdecimal.service';
+/*NgxSkltnModule skeleton loader para proceso lento de carga */
 const skltnConfig: SkltnConfig = {
   rectRadius: 10,
   flareWidth: '150px',

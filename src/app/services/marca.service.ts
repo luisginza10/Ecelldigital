@@ -20,7 +20,7 @@ export class MarcaService {
     descripcion: new FormControl('', Validators.required),
     estado: new FormControl(null),
     img: new FormControl(null),
-    createAt: new FormControl(null)
+    createat: new FormControl(null)
   });
   constructor(
     private http: HttpClient,

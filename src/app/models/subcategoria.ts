@@ -4,7 +4,7 @@ export class Subcategoria {
   id?: number;
   descripcion?: string;
   estado?: boolean;
-  createAt?: Date;
+  createat?: Date;
   icono?: string;
   categoria?: Categoria;
   admin?: boolean;

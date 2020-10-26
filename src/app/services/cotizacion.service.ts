@@ -18,7 +18,7 @@ export class CotizacionService {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     montous: new FormControl(0, Validators.required),
-    createAt: new FormControl(null),
+    createat: new FormControl(null),
     estado: new FormControl(null)
   });
 
@@ -40,7 +40,7 @@ export class CotizacionService {
     const coti: Cotizacion = {};
     coti.id = form.id;
     coti.montous = form.montous;
-    coti.createAt = form.createAt;
+    coti.createat = form.createat;
     coti.estado = form.estado;
     //console.log(coti);
     this.form.setValue(coti);

@@ -4,7 +4,7 @@ export class Categoria {
   id?: number;
   descripcion?: string;
   estado?: boolean;
-  createAt?: Date;
+  createat?: Date;
   icono?: string;
   subcatelist?: Subcategoria[] = [];
 }

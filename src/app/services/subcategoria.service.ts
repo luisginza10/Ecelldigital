@@ -20,7 +20,7 @@ export class SubcategoriaService {
     estado: new FormControl(null),
     icono: new FormControl(null),
     categoria: new FormControl(null, Validators.required),
-    createAt: new FormControl(null),
+    createat: new FormControl(null),
   });
   constructor(
     private http: HttpClient,

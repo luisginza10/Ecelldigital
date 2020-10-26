@@ -23,7 +23,7 @@ export class EmpleadoService {
     telefono: new FormControl(null),
     celular: new FormControl(null, Validators.required),
     estado: new FormControl(null),
-    createAt: new FormControl(null),
+    createat: new FormControl(null),
     img: new FormControl(null),
     cargo: new FormControl(null),
   });

@@ -3,5 +3,5 @@ export class Marca {
   descripcion?: string;
   estado?: boolean;
   img?: string;
-  createAt?: Date;
+  createat?: Date;
 }

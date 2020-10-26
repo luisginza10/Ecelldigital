@@ -1,6 +1,6 @@
 export interface Cotizacion {
   id?: number;
   montous?: number;
-  createAt?: Date;
+  createat?: Date;
   estado?: boolean;
 }

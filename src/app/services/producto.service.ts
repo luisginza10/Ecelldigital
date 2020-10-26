@@ -38,7 +38,7 @@ export class ProductoService {
     nuevo: new FormControl(0),
     subcategoria: this.myControlsubcategoria,
     marca: this.myControlMarca,
-    createAt: new FormControl(null)
+    createat: new FormControl(null)
   });
   constructor(
     private http: HttpClient,

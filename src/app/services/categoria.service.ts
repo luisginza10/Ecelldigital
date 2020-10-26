@@ -19,7 +19,7 @@ export class CategoriaService {
     descripcion: new FormControl('', Validators.required),
     estado: new FormControl(null),
     icono: new FormControl(null, Validators.required),
-    createAt: new FormControl(null),
+    createat: new FormControl(null),
     subcatelist: new FormControl(null),
   });
   constructor(

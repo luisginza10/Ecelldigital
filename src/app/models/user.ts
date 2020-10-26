@@ -7,6 +7,6 @@ export class User {
   password?: string;
   empleado?: Empleado;
   estado?: boolean;
-  createAt?: Date;
+  createat?: Date;
   role?: Role;
 }

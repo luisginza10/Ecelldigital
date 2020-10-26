@@ -18,5 +18,5 @@ export class Producto {
   nuevo?: number;
   subcategoria?: Subcategoria;
   marca?: Marca;
-  createAt?: Date;
+  createat?: Date;
 }
